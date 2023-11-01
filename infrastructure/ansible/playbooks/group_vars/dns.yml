@@ -1,3 +1,4 @@
+---
 # bind_dnssec_enable: false
 # bind_dnssec_validation: false
 
@@ -7,7 +8,7 @@ dns_zone: home.staniek.name
 dns_reverse_zone: "31.172"
 dns_ironmaiden_zone: staniek.io
 
-bind_forwarders: 
+bind_forwarders:
   - 208.67.222.222
   - 208.67.220.220
 # bind_recursion: true

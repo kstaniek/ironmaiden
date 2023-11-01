@@ -1,3 +1,4 @@
+---
 dns:
   children:
     primary:
@@ -13,7 +14,5 @@ pi:
   hosts:
     pi1:
       ansible_host: 172.31.20.105
-          
-      
-      
+
 

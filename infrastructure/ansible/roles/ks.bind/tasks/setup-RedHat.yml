@@ -11,9 +11,9 @@
 
 - name: RedHat | Enable Service {{ firewall_port }} in Firewalld
   firewalld:
-    immediate: yes
+    immediate: true
     service: "{{ firewall_port }}"
-    permanent: yes
+    permanent: true
     state: enabled
 
 - name: RedHat | Create Logs Directory
@@ -27,8 +27,8 @@
 - name: RedHat | Set named_write_master_zones flag on and keep it persistent across reboots (SELinux)
   seboolean:
     name: named_write_master_zones
-    state: yes
-    persistent: yes
+    state: true
+    persistent: true
 
 - name: RedHat | Allow Bind to Bind (no pun intended) to TCP Port {{ bind_statistics_port }} (SELinux)
   community.general.seport:
@@ -45,12 +45,12 @@
     group: "{{ bind_user }}"
     mode: 0640
   notify:
-  - restart bind
+    - restart bind
 
 - name: RedHat | Configure Master DNS Server
   block:
     - name: RedHat | Populate {{ bind_data_dir }} Internal Zone
-      template: 
+      template:
         src: "files/db.{{ homelab_domain_name }}"
         dest: "{{ bind_data_dir }}"
         owner: "{{ bind_user }}"
@@ -58,10 +58,10 @@
         mode: 0644
         validate: "named-checkzone {{ homelab_domain_name }} %s"
       notify:
-      - restart bind
+        - restart bind
 
     - name: RedHat | Populate {{ bind_data_dir }} Reverse Zone
-      template: 
+      template:
         src: "files/db.{{ homelab_reverse_zone }}"
         dest: "{{ bind_data_dir }}"
         owner: "{{ bind_user }}"
@@ -69,10 +69,10 @@
         mode: 0644
         validate: "named-checkzone {{ homelab_reverse_zone }}.in-addr.arpa %s"
       notify:
-      - restart bind
+        - restart bind
 
     - name: RedHat | Copy {{ bind_config_file }} Configuration File
-      template: 
+      template:
         src: "{{ bind_config_file }}.master.j2"
         dest: "/etc/{{ bind_config_file }}"
         owner: root
@@ -80,13 +80,13 @@
         mode: 0640
         validate: "named-checkconf %s"
       notify:
-      - restart bind
+        - restart bind
   when: "'dns1' in group_names"
 
 - name: RedHat | Configure Slave DNS Server
   block:
     - name: RedHat | Copy {{ bind_config_file }} Configuration File
-      template: 
+      template:
         src: "{{ bind_config_file }}.slave.j2"
         dest: "/etc/{{ bind_config_file }}"
         owner: root
@@ -94,14 +94,14 @@
         mode: 0640
         validate: "named-checkconf %s"
       notify:
-      - restart bind
+        - restart bind
   when: "'dns2' in group_names"
 
 - name: RedHat | Start and Enable Service {{ systemd_service }}
   service:
     name: "{{ systemd_service }}"
     state: started
-    enabled: yes
+    enabled: true
 
 
 #
@@ -110,29 +110,29 @@
 - name: RedHat | Create System Group {{ prometheus_user }}
   group:
     state: present
-    system: yes
+    system: true
     name: "{{ prometheus_user }}"
 
 - name: RedHat | Create System User {{ prometheus_user }}
   user:
     state: present
-    system: yes
+    system: true
     name: "{{ prometheus_user }}"
     groups: "{{ prometheus_user }}"
     shell: "/sbin/nologin"
 
 - name: RedHat | Enable Service {{ bind_exporter_port }} in Firewalld
   firewalld:
-    immediate: yes
+    immediate: true
     port: "{{ bind_exporter_port }}/tcp"
-    permanent: yes
+    permanent: true
     state: enabled
 
 - name: RedHat | Unarchive a file that needs to be downloaded
   unarchive:
     src: "{{ bind_exporter_url }}"
     dest: "/usr/local/bin"
-    remote_src: yes
+    remote_src: true
     owner: root
     group: root
     creates: "/usr/local/bin/{{ bind_exporter_binary }}"
@@ -155,4 +155,4 @@
   service:
     name: "{{ bind_exporter_systemd_service }}"
     state: started
-    enabled: yes
+    enabled: true

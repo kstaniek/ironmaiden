@@ -1,3 +1,4 @@
+---
 home_staniek_name:
   - name: "cam-east-left"
     records: ["172.31.21.1"]
@@ -21,4 +22,3 @@ home_staniek_name:
     records: ["172.31.21.254"]
   - name: "dupa"
     records: ["172.31.21.128"]
-  

@@ -26,4 +26,3 @@
     # group: "{{ outer_item.name }}"
     owner: "{{ outer_item.name }}"
     mode: '0600'
-  

@@ -1,3 +1,4 @@
+---
 - name: Execute killadd script
   ansible.builtin.script: "{{ role_path }}/files/k3s-killall.sh }}"
 

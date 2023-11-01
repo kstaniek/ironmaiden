@@ -2,12 +2,10 @@
 - name: Configure Kea DHCP
   hosts: localhost
   pre_tasks:
-  - name: Load network topology into the global namespace
-    community.sops.load_vars:
-      file: network_topology.sops.yaml
+    - name: Load network topology into the global namespace
+      community.sops.load_vars:
+        file: network_topology.sops.yaml
   roles:
     - role: ks.kea
       vars:
         ntp_server: 172.31.13.254
-        
-    

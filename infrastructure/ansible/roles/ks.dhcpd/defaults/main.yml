@@ -1,10 +1,10 @@
 ---
-## Default variables for the role. These variables have the lowest
-## priority of any variables available, and can be easily overridden 
-## by any other variable, including inventory variables.
+# Default variables for the role. These variables have the lowest
+# priority of any variables available, and can be easily overridden 
+# by any other variable, including inventory variables.
 
 packages:
-- isc-dhcp-server
+  - isc-dhcp-server
 
 systemd_service: "isc-dhcp-server"
 firewall_port: "dhcp"
@@ -19,4 +19,3 @@ dhcpd_config_file: "dhcpd.conf"
 bind_primary_server_address: "172.31.20.50"
 bind_secondary_server_address: "172.31.20.51"
 tftp_next_server: "172.31.20.200"
-

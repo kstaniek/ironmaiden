@@ -11,10 +11,10 @@
     regexp: '^#NTP='
     line: NTP=172.31.20.254
   notify:
-      - restart timesyncd
+    - restart timesyncd
 
 - name: Debian | Start and Enable Service {{ systemd_service }}
   service:
     name: "{{ systemd_service }}"
     state: started
-    enabled: yes
+    enabled: true

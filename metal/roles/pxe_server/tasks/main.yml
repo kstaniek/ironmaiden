@@ -1,3 +1,4 @@
+---
 - name: Get Docker info
   docker_host_info: {}
   register: docker_info_result

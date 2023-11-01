@@ -1,3 +1,4 @@
+---
 - name: Install lvm2 package
   hosts: metal
   gather_facts: false

@@ -8,9 +8,7 @@
   register: account_list
 
 - name: VMWare | Create users
-  include_tasks: create_users.yml  
+  include_tasks: create_users.yml
   loop: "{{ users }}"
   loop_control:
     loop_var: outer_item
-
-    

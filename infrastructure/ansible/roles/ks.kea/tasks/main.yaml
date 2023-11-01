@@ -1,3 +1,4 @@
+---
 - name: Generate Subnet4
   set_fact:
     subnet4: "{{ subnet4 | default([]) + [{ 'subnet': item.dhcp.subnet, 'pools': [{'pool': item.dhcp.range.start + ' - ' + item.dhcp.range.end}], 'option-data': item.dhcp.options }] }}"

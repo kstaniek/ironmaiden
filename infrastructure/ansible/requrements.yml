@@ -1,3 +1,4 @@
+---
 collections:
   - name: onepassword.connect
     version: "==2.2.3"

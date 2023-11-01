@@ -62,12 +62,6 @@ spec:
             args:
               - "--config"
               - "/etc/vector/vector.yaml"
-            # resources:
-            #   requests:
-            #     cpu: 35m
-            #     memory: 381M
-            #   limits:
-            #     memory: 726M
 
     service:
       main:

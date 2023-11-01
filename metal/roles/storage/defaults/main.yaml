@@ -1,3 +1,4 @@
+---
 device: /dev/sda
 partition: /dev/sda1
 mount_point: /mnt/data

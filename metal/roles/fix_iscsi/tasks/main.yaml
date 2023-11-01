@@ -1,3 +1,4 @@
+---
 - name: Remove iscsi initiator file
   ansible.builtin.file:
     path: /etc/iscsi/initiatorname.iscsi

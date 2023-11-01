@@ -1,3 +1,4 @@
+---
 - name: Get IP
   debug: var=ansible_all_ipv4_addresses
 
@@ -16,4 +17,3 @@
     - 208.67.220.220
     autoconnect: true
     state: present
-    

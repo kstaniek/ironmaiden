@@ -11,27 +11,27 @@
     regexp: '^INTERFACESv4='
     line: 'INTERFACESv4="eth0"'
     state: present
-    backup: yes
+    backup: true
   notify:
-  - restart dhcpd
+    - restart dhcpd
 
 - name: Debian | Configure Primary DHCP Server
   block:
     - name: Debian | Copy {{ dhcpd_config_file }}
-      template: 
+      template:
         src: "{{ dhcpd_config_file }}.primary.j2"
         dest: "/etc/dhcp/{{ dhcpd_config_file }}"
         owner: root
         group: root
         mode: 0644
       notify:
-      - restart dhcpd
+        - restart dhcpd
   when: "'primary' in group_names"
 
 - name: Debian | Configure Secondary DHCP Server
   block:
     - name: Debian | Copy {{ dhcpd_config_file }}
-      template: 
+      template:
         src: "{{ dhcpd_config_file }}.secondary.j2"
         dest: "/etc/dhcp/{{ dhcpd_config_file }}"
         owner: root
@@ -45,4 +45,4 @@
   service:
     name: "{{ systemd_service }}"
     state: started
-    enabled: yes
+    enabled: true

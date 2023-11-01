@@ -1,11 +1,11 @@
 ---
-## Default variables for the role. These variables have the lowest
-## priority of any variables available, and can be easily overridden 
-## by any other variable, including inventory variables.
+# Default variables for the role. These variables have the lowest
+# priority of any variables available, and can be easily overridden 
+# by any other variable, including inventory variables.
 
 packages:
-  - bind9 
-  - bind9utils 
+  - bind9
+  - bind9utils
   - dnsutils
 
 systemd_service: "named"

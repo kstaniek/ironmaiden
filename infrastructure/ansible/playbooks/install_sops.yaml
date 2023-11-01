@@ -2,8 +2,8 @@
 - name: Install sops on localhost
   hosts: localhost
   tasks:
-  - name: Install sops on localhost
-    ansible.builtin.include_role:
-      name: community.sops.install
-    vars:
-      sops_install_on_localhost: true
+    - name: Install sops on localhost
+      ansible.builtin.include_role:
+        name: community.sops.install
+      vars:
+        sops_install_on_localhost: true
