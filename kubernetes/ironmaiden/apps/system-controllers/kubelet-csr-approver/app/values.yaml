@@ -1,0 +1,5 @@
+---
+providerRegex: |
+  ^(metal[0-9])$
+
+bypassDnsResolution: true

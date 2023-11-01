@@ -1,0 +1,32 @@
+# bind_dnssec_enable: false
+# bind_dnssec_validation: false
+
+dns_primary_server: 172.31.20.50
+dns_secondary_server: 172.31.20.51
+dns_zone: home.staniek.name
+dns_reverse_zone: "31.172"
+dns_ironmaiden_zone: staniek.io
+
+bind_forwarders: 
+  - 208.67.222.222
+  - 208.67.220.220
+# bind_recursion: true
+# bind_listen_ipv4: ['172.31.11.88']
+# bind_allow_query: ['172.31.0.0/16']
+# # bind_dns_keys:
+# # - name: primary_key
+# #   algorithm: "{{ lookup('vars', 'bind_dns_algorithm') }}"
+#   secret: "{{ lookup('vars', 'bind_dns_secret') }}"
+# bind_zones:
+# - name: home.staniek.name
+#   create_reverse_zones: true
+#   type: primary
+#   primaries:
+#     - 172.31.11.88
+#   name_servers:
+#     - ns1.home.staniek.name.
+#     - ns2.home.staniek.name.
+#   hosts: "{{ lookup('vars', 'hosts_home_staniek_name') }}"
+
+#   networks:
+#     - '172.31'

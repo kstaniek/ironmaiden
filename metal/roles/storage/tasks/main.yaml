@@ -1,0 +1,31 @@
+- name: Partition the disk into a single large partition filling the disk
+  become: yes
+  parted:
+    device: "{{ device }}"
+    number: 1
+    state: present
+    part_start: "0%"
+    part_end: "100%"
+    unit: GB
+
+- name: Create filesystem on new partition
+  become: yes
+  filesystem:
+    fstype: ext4
+    dev: "{{ partition }}"
+
+- name: Mount drive on {{ mount_point }}
+  become: yes
+  mount:
+    src: "{{ partition }}"
+    path: "{{ mount_point }}"
+    fstype: ext4
+    state: mounted
+    boot: yes
+    backup: yes
+
+- name: Apply label 'node.longhorn.io/create-default-disk=true' on storage nodes in Kubernetes
+  become: yes
+  delegate_to: localhost
+  command: kubectl label nodes --overwrite {{ item }} node.longhorn.io/create-default-disk=true
+  loop: "{{ groups['metal'] }}"

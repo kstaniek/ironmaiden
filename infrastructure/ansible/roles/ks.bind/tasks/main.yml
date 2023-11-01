@@ -1,0 +1,5 @@
+---
+# - include: setup-RedHat.yml
+#   when: (ansible_os_family == 'RedHat') or (ansible_os_family == 'Rocky')
+- include: setup-Debian.yml
+  when: (ansible_os_family == 'Debian')

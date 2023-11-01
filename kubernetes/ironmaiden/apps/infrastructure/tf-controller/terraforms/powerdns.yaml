@@ -1,0 +1,50 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/ocirepository-source-v1beta2.json
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: oci-terraform-powerdns
+  namespace: infrastructure
+spec:
+  interval: 1m
+  url: oci://ghcr.io/kstaniek/terraform/powerdns
+  ref:
+    tag: main
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: powerdns
+  namespace: infrastructure
+spec:
+  parallelism: 1
+  interval: 12h
+  approvePlan: "auto"
+  force: true
+  backendConfig:
+    disable: true
+  cliConfigSecretRef:
+    name: tfe-cli-config
+  path: "./"
+  sourceRef:
+    kind: OCIRepository
+    name: oci-terraform-powerdns
+    namespace: infrastructure
+  runnerPodTemplate:
+    spec:
+      env:
+        - name: OP_CONNECT_HOST
+          value: http://172.31.30.1:8080
+        - name: OP_CONNECT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: tf-controller-secrets
+              key: OP_CONNECT_TOKEN
+      volumeMounts:
+        - name: tf-controller-sops-key
+          mountPath: /home/runner/.config/sops/age/keys.txt
+          subPath: keys.txt
+      volumes:
+        - name: tf-controller-sops-key
+          secret:
+            secretName: tf-controller-sops-key

@@ -1,0 +1,8 @@
+---
+- name: Configure Hostname
+  hosts: dns
+  pre_tasks:
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name: "{{inventory_hostname}}"
+    

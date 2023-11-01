@@ -1,0 +1,19 @@
+- name: Get IP
+  debug: var=ansible_all_ipv4_addresses
+
+- debug: var=ansible_default_ipv4.address
+
+- name: Add an Ethernet connection with static IP configuration
+  community.general.nmcli:
+    conn_name: Wired Connection1
+    ifname: eth0
+    type: ethernet
+    ip4: "{{ansible_default_ipv4.address}}/24"
+    gw4: 172.31.11.254
+    dns4:
+    - 127.0.0.1
+    - 208.67.222.222
+    - 208.67.220.220
+    autoconnect: true
+    state: present
+    

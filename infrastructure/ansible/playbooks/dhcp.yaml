@@ -1,0 +1,27 @@
+---
+- name: Configure DHCP
+  hosts: dns
+  environment:
+    OP_CONNECT_HOST: http://172.31.30.1:8080
+  collections:
+    - onepassword.connect
+    - community.sops
+  pre_tasks:
+  - name: Load network topology into the global namespace
+    community.sops.load_vars:
+      file: network_topology.sops.yaml
+  - name: Load onepassword token variable into the global namespace
+    community.sops.load_vars:
+      file: onepassword.sops.yaml
+  - name: Find the item with the label "Bind9" in the vault "Services"
+    item_info:
+      token: "{{ connect_token }}"
+      vault: Services
+      item: Bind9
+      field: rndc-key-secret
+    no_log: true
+    register: bind_config
+  roles:
+    - role: ks.dhcpd
+      vars: 
+        rndc_key: "{{bind_config.field}}"

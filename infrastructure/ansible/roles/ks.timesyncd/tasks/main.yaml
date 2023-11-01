@@ -1,0 +1,20 @@
+---
+- name: Debian | Install Packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"
+
+- name: Debian | Configure NTP server
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/timesyncd.conf
+    regexp: '^#NTP='
+    line: NTP=172.31.20.254
+  notify:
+      - restart timesyncd
+
+- name: Debian | Start and Enable Service {{ systemd_service }}
+  service:
+    name: "{{ systemd_service }}"
+    state: started
+    enabled: yes

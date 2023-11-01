@@ -1,0 +1,24 @@
+home_staniek_name:
+  - name: "cam-east-left"
+    records: ["172.31.21.1"]
+  - name: "cam-south-right"
+    records: ["172.31.21.2"]
+  - name: "cam-west-right"
+    records: ["172.31.21.3"]
+  - name: "cam-west-center"
+    records: ["172.31.21.4"]
+  - name: "cam-north-right"
+    records: ["172.31.21.5"]
+  - name: "cam-north-left"
+    records: ["172.31.21.6"]
+  - name: "cam-east-right"
+    records: ["172.31.21.7"]
+  - name: "cam-west-left"
+    records: ["172.31.21.8"]
+  - name: "cam-recorder-prod1"
+    records: ["172.31.21.20"]
+  - name: "gw-vlan22"
+    records: ["172.31.21.254"]
+  - name: "dupa"
+    records: ["172.31.21.128"]
+  

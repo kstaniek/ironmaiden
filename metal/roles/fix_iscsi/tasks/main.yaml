@@ -1,0 +1,39 @@
+- name: Remove iscsi initiator file
+  ansible.builtin.file:
+    path: /etc/iscsi/initiatorname.iscsi
+    state: absent
+
+- name: Insert RequiresMountsFor
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/iscsi-init.service
+    regexp: '^RequiresMountsFor'
+    insertafter: '^\[Unit\]'
+    line: 'RequiresMountsFor=/etc/iscsi'
+
+- name: Insert After
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/iscsi-init.service
+    regexp: '^After'
+    insertafter: '^\[Unit\]'
+    line: 'After=systemd-remount-fs.service'
+
+- name: Insert WantedBy
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/iscsi-init.service
+    regexp: '^WantedBy'
+    insertafter: '^\[Service\]'
+    line: 'WantedBy=systemd-remount-fs.service'
+
+- name: Make sure iscsi service works
+  ansible.builtin.systemd:
+    name: iscsi-init
+    enabled: true
+    state: restarted
+    daemon_reload: true
+
+- name: Check iscsi initiator file eixts
+  stat: path=/etc/iscsi/initiatorname.iscsi
+  register: initiator
+
+- fail: msg="iscsi initiatorname does not exists"
+  when: not initiator.stat.exists

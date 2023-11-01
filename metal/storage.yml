@@ -1,0 +1,5 @@
+- name: Format disks for storage before installing Longhorn
+  hosts: metal
+  gather_facts: false
+  roles:
+    - storage

@@ -1,0 +1,23 @@
+---
+- name: Configure Timesyncd
+  hosts: all
+  roles:
+    - role: ks.timesyncd
+      vars:
+        ntp_server: 172.31.13.254
+    - role: ks.timezone
+
+  post_tasks:
+    - name: Add an Ethernet connection with static IP configuration
+      community.general.nmcli:
+        conn_name: Wired Connection
+        ifname: eth0
+        type: ethernet
+        ip4: "{{ target_ip }}"
+        gw4: 172.31.20.254
+        dns4:
+        - 208.67.222.222
+        - 208.67.220.220
+        - 127.0.0.1
+        autoconnect: true
+        state: present

@@ -1,0 +1,3 @@
+---
+- name: VMWare | Enable GuestIPHack
+  command: esxcli system settings advanced set -o /Net/GuestIPHack -i 1

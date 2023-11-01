@@ -1,0 +1,280 @@
+{
+  "Dhcp4": {
+    "interfaces-config": {
+      "interfaces": [ "eth0" ],
+      "dhcp-socket-type": "udp"
+    },
+    "lease-database": {
+      "type": "memfile",
+      "persist": true,
+      "name": "/tmp/leases.csv"
+    },
+    "reservations-global": false,
+    "reservations-in-subnet": true,
+    "reservations-out-of-pool": true,
+    "valid-lifetime": 86400,
+    "calculate-tee-times": true,
+    "hooks-libraries": [
+      {
+        "library": "/usr/lib/aarch64-linux-gnu/kea/hooks/libdhcp_lease_cmds.so"
+      },
+      {
+        "library": "/usr/lib/aarch64-linux-gnu/kea/hooks/libdhcp_ha.so",
+        "parameters": {
+          "high-availability": [
+            {
+              "this-server-name": "{{inventory_hostname}}",
+              "mode": "hot-standby",
+              "multi-threading": {
+                "enable-multi-threading": true,
+                "http-dedicated-listener": true
+              },
+              "peers": [
+                {
+                  "name": "ns1",
+                  "url": "http://172.31.20.50:8001/",
+                  "role": "primary",
+                  "auto-failover": true
+                },
+                {
+                  "name": "ns2",
+                  "url": "http://172.31.20.51:8001/",
+                  "role": "standby",
+                  "auto-failover": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "option-data": [
+      {
+        "name": "domain-name-servers",
+        "data": "172.31.20.50, 172.31.20.51"
+      },
+      {
+        "name": "domain-name",
+        "data": "home.staniek.name"
+      },
+      {
+        "name": "domain-search",
+        "data": "home.staniek.name"
+      }
+    ],
+    "subnet4": [
+      {
+        "subnet": "192.0.2.0/24",
+        "pools": [
+          {
+            "pool": "192.0.2.21 - 192.0.2.254"
+          }
+        ],
+        "option-data": [
+          {
+            "name": "routers",
+            "data": "192.0.2.1"
+          }
+        ],
+        "reservations": [
+          {
+            "hw-address": "1a:1b:1c:00:ac:43",
+            "ip-address": "192.0.2.2"
+          },
+          {
+            "hw-address": "1a:1b:1c:ab:c1:f7",
+            "ip-address": "192.0.2.3"
+          },
+          {
+            "hw-address": "1a:1b:1c:34:ea:73",
+            "ip-address": "192.0.2.4"
+          },
+          {
+            "hw-address": "1a:1b:1c:ca:fe:be",
+            "ip-address": "192.0.2.5"
+          },
+          {
+            "hw-address": "1a:1b:1c:be:be:13",
+            "ip-address": "192.0.2.6"
+          },
+          {
+            "hw-address": "1a:1b:1c:13:37:ff",
+            "ip-address": "192.0.2.7"
+          },
+          {
+            "hw-address": "1a:1b:1c:d4:e1:aa",
+            "ip-address": "192.0.2.8"
+          },
+          {
+            "hw-address": "1a:1b:1c:4f:3f:2f",
+            "ip-address": "192.0.2.9"
+          },
+          {
+            "hw-address": "1a:1b:1c:18:21:87",
+            "ip-address": "192.0.2.10"
+          },
+          {
+            "hw-address": "1a:1b:1c:55:58:12",
+            "ip-address": "192.0.2.11"
+          },
+          {
+            "hw-address": "1a:1b:1c:86:75:30",
+            "ip-address": "192.0.2.12"
+          },
+          {
+            "hw-address": "1a:1b:18:67:53:09",
+            "ip-address": "192.0.2.13"
+          },
+          {
+            "hw-address": "1a:1b:1c:00:00:01",
+            "ip-address": "192.0.2.14"
+          },
+          {
+            "hw-address": "1a:1b:1c:99:99:99",
+            "ip-address": "192.0.2.15"
+          },
+          {
+            "hw-address": "1a:1b:1c:ff:ff:ff",
+            "ip-address": "192.0.2.16"
+          },
+          {
+            "hw-address": "1a:1b:1c:ee:ee:ee",
+            "ip-address": "192.0.2.17"
+          },
+          {
+            "hw-address": "1a:1b:1c:dd:dd:dd",
+            "ip-address": "192.0.2.18"
+          },
+          {
+            "hw-address": "1a:1b:1c:cc:cc:cc",
+            "ip-address": "192.0.2.19"
+          },
+          {
+            "hw-address": "1a:1b:1c:bb:bb:bb",
+            "ip-address": "192.0.2.20"
+          }
+        ]
+      },
+      {
+        "subnet": "198.51.100.0/24",
+        "pools": [
+          {
+            "pool": "198.51.100.2 - 198.51.100.254"
+          }
+        ],
+        "option-data": [
+          {
+            "name": "routers",
+            "data": "198.51.100.1"
+          }
+        ]
+      },
+      {
+        "subnet": "203.0.113.0/24",
+        "pools": [
+          {
+            "pool": "203.0.113.2 - 203.0.113.254"
+          }
+        ],
+        "option-data": [
+          {
+            "name": "routers",
+            "data": "203.0.113.1"
+          }
+        ]
+      }
+    ],
+    "loggers": [
+      {
+        "name": "kea-dhcp4",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.dhcpsrv",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-dhcpsrv.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.leases",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-leases.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.ha-hooks",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-ha-hooks.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.commands",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-commands.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.dhcp4",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-dhcp4.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.hooks",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-hooks.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.alloc-engine",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-alloc-engine.log",
+            "maxver": 10
+          }
+        ]
+      },
+      {
+        "name": "kea-dhcp4.commands",
+        "severity": "INFO",
+        "output_options": [
+          {
+            "output": "/path/dhcp4-commands.log",
+            "maxver": 10
+          }
+        ]
+      }
+    ]
+  }
+}

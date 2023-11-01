@@ -1,0 +1,108 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home-automation
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 1Gi
+              storageClass: ceph-block
+              globalMounts:
+                - path: /config
+
+        pod:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: |
+              [{
+                "name":"multus-internet",
+                "namespace": "network",
+                "ips": ["172.31.11.10/24"]
+              },
+              {
+                "name":"multus-legacy",
+                "namespace": "network",
+                "ips": ["172.31.12.253/24"]
+              }]
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-assistant/home-assistant
+              tag: 2023.10.5@sha256:3b2810093b118a77c87f3639e51930ffb0f10e8af679ba8582843e9bbfdd5fa5
+            env:
+              SECRET_RECORDER_DB_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: home-assistant-pguser-home-assistant
+                    key: uri
+            envFrom:
+              - secretRef:
+                  name: home-assistant-secret
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 47m
+                memory: 1254M
+              limits:
+                memory: 1254M
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8123
+
+    ingress:
+      main:
+        enabled: true
+        className: "external-nginx"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: ingress-ext.staniek.io
+        hosts:
+          - host: &host "hass.staniek.io"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      deploy-key:
+        type: secret
+        name: home-assistant-secret
+        defaultMode: 256
+        globalMounts:
+          - path: /root/.ssh/id_rsa
+            subPath: GH_DEPLOY_KEY

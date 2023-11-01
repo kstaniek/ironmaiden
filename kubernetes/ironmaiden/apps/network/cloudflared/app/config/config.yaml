@@ -1,0 +1,11 @@
+---
+ingress:
+  - hostname: "staniek.io"
+    service: https://nginx-external-controller.network.svc.cluster.local:443
+    originRequest:
+      originServerName: ingress-ext.staniek.io
+  - hostname: "*.staniek.io"
+    service: https://nginx-external-controller.network.svc.cluster.local:443
+    originRequest:
+      originServerName: ingress-ext.staniek.io
+  - service: http_status:404

@@ -1,0 +1,6 @@
+---
+roles:
+  - name: PowerDNS.pdns
+    src: https://github.com/PowerDNS/pdns-ansible.git
+    version: v1.8.0
+    scm: git

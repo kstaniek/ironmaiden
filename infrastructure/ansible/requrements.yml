@@ -1,0 +1,8 @@
+collections:
+  - name: onepassword.connect
+    version: "==2.2.3"
+  - name: community.sops
+roles:
+  - name: bertvv.bind
+    version: "==5.1.0"
+    

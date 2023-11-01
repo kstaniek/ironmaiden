@@ -1,0 +1,4 @@
+- name: Uninstall k3s cluster
+  hosts: metal
+  roles:
+    - k3s_uninstall

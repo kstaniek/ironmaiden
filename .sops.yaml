@@ -1,0 +1,10 @@
+---
+creation_rules:
+  - path_regex: kubernetes/ironmaiden/.*\.sops\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    # Personal, Flux
+    age: >-
+      age1mse8y4ju5e22j8trx5hcxsv6hc2tcy3rh2ulney0mqrhtd84rpfqtpxu3e
+  - path_regex: infrastructure/.*\.sops\.ya?ml
+    age: >-
+      age1mse8y4ju5e22j8trx5hcxsv6hc2tcy3rh2ulney0mqrhtd84rpfqtpxu3e

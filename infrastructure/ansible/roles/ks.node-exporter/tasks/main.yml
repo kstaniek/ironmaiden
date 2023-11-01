@@ -1,0 +1,5 @@
+---
+- include: setup-RedHat.yml
+  when: (ansible_os_family == 'RedHat') or (ansible_os_family == 'Rocky')
+- include: setup-RaspberryPi64.yml
+  when: (ansible_machine == 'aarch64')

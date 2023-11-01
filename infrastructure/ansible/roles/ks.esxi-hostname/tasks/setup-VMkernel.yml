@@ -1,0 +1,6 @@
+---
+- name: VMWare | Set hostname
+  command: esxcli system hostname set --host={{ hostname }} --domain={{ homenetwork_domain_name }}
+
+- name: VMWare | Restart Services
+  command: services.sh restart

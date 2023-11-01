@@ -1,0 +1,10 @@
+---
+- name: Configure Timesyncd
+  hosts: dns
+  roles:
+    - role: ks.timezone
+    - role: ks.timesyncd
+      vars:
+        ntp_server: 172.31.13.254
+        
+    

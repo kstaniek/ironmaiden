@@ -1,0 +1,36 @@
+---
+- name: Set static ip
+  hosts: ns1
+  tasks:
+    - name: Add an Ethernet connection with static IP configuration
+      community.general.nmcli:
+        conn_name: Wired Connection
+        ifname: eth0
+        type: ethernet
+        ip4: 172.31.20.50/24
+        gw4: 172.31.20.254
+        dns4:
+        - 208.67.222.222
+        - 208.67.220.220
+        - 127.0.0.1
+        - 172.31.20.50
+        autoconnect: true
+        state: present
+
+- name: Set static ip
+  hosts: ns2
+  tasks:
+    - name: Add an Ethernet connection with static IP configuration
+      community.general.nmcli:
+        conn_name: Wired Connection
+        ifname: eth0
+        type: ethernet
+        ip4: 172.31.20.51/24
+        gw4: 172.31.20.254
+        dns4:
+        - 208.67.222.222
+        - 208.67.220.220
+        - 127.0.0.1
+        - 172.31.20.50
+        autoconnect: true
+        state: present

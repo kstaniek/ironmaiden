@@ -1,0 +1,61 @@
+#version=RHEL8
+
+# Do not use graphical install
+text
+
+# Keyboard layouts
+keyboard --xlayouts='us'
+# System language
+lang en_US.UTF-8
+
+# Partition clearing information
+clearpart --all --drives={{ hostvars[item]['disk'] }}
+# Partitioning
+ignoredisk --only-use={{ hostvars[item]['disk'] }}
+partition /boot/efi --fstype=vfat --size=512
+partition / --fstype=ext4 --grow
+
+# Network information
+network --bootproto=static --device={{ hostvars[item]['network_interface'] }} --ip={{ hostvars[item]['ansible_host'] }} --gateway={{ ansible_default_ipv4.gateway }} --nameserver={{ dns_server }} --netmask={{ ansible_default_ipv4.netmask }} --ipv6=auto --hostname={{ hostvars[item]['inventory_hostname'] }} --activate
+network --bootproto=static --device={{ hostvars[item]['network_interface'] }} --ip={{ hostvars[item]['vlan12_ip'] }} --netmask=255.255.255.0 --onboot=on --ipv6=auto --activate --vlanid=12 --interfacename={{ hostvars[item]['network_interface'] }}.12
+network --bootproto=static --device={{ hostvars[item]['network_interface'] }} --ip={{ hostvars[item]['vlan11_ip'] }} --netmask=255.255.255.0 --onboot=on --ipv6=auto --activate --vlanid=11 --interfacename={{ hostvars[item]['network_interface'] }}.11
+
+# Use network installation
+url --url="http://{{ ansible_default_ipv4.address }}/os"
+repo --name="AppStream" --baseurl="http://{{ ansible_default_ipv4.address }}/os/AppStream"
+# repo --name="BaseOS" --baseurl="http://{{ ansible_default_ipv4.address }}/os/BaseOS"
+
+# Disable Setup Agent on first boot
+firstboot --disable
+# Do not configure the X Window System
+skipx
+# Enable NTP
+services --enabled="chronyd"
+# System timezone
+timezone {{ timezone }} --utc
+
+# Create user (locked by default)
+user --groups=wheel --name=admin
+# Add SSH key
+sshkey --username=root "{{ ssh_public_key }}"
+# Disable root password login
+rootpw --lock
+
+# Disable SELinux
+selinux --disabled
+
+# Disable firewall
+firewall --disabled
+
+%packages
+@^custom-environment
+openssh-server
+nfs-utils
+iscsi-initiator-utils
+lvm2
+%end
+
+# Enable iSCSI for Kubernetes storage
+services --enable=iscsid
+
+reboot

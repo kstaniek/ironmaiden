@@ -1,0 +1,43 @@
+{
+  "discord.enabled": true,
+  "files.associations": {
+      "*.json5": "jsonc",
+      "**/terraform/**/*.tf": "terraform",
+      "**/kubernetes/**/*.sops.toml": "plaintext"
+  },
+  "material-icon-theme.folders.associations": {
+      ".taskfiles": "utils",
+      "dbms": "database",
+      "dev": "less",
+      "flux-system": "kubernetes",
+      "kopia": "server",
+      "kube-system": "kubernetes",
+      "media": "video",
+      "monitoring": "event",
+      "networking": "connection",
+      "outline": "docs",
+      "security": "keys",
+      "self-hosted": "app",
+      "setup": "import",
+      "hack": "scripts",
+      "config": "environment"
+      },
+  "prettier.configPath": ".github/linters/prettier/.prettierrc.yaml",
+  "prettier.ignorePath": ".github/linters/prettier/.prettierignore",
+  "yaml.schemas": {
+      "https://json.schemastore.org/taskfile.json": [
+          "Taskfile.yaml",
+          ".taskfiles/*.yaml"
+      ],
+      "Kubernetes": "kubernetes/*.yaml",
+      "https://json.schemastore.org/kustomization.json": [
+        
+      ]
+  },
+  "yaml.customTags": [
+      "!env_var"
+  ],
+"explorer.autoReveal": false,
+"ansible.python.interpreterPath": "/usr/bin/python3",
+"files.insertFinalNewline": true
+}

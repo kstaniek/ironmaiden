@@ -1,0 +1,128 @@
+- name: Debian | Install Packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"
+
+- name: Debian | Create Logs Directory
+  file:
+    path: "/var/log/{{systemd_service}}"
+    state: directory
+    owner: "{{ bind_user }}"
+    group: "{{ bind_user }}"
+    mode: 0750
+
+- name: Debian | Install DNS Updater Key
+  template:
+    src: "rndc.key.j2"
+    dest: "/etc/bind/rndc.key"
+    owner: root
+    group: "{{ bind_user }}"
+    mode: 0640
+  notify:
+  - restart bind
+
+- name: Debian | Install DDNS Updater Key
+  template:
+    src: "ddns.key.j2"
+    dest: "/etc/bind/ddns.key"
+    owner: root
+    group: "{{ bind_user }}"
+    mode: 0640
+  notify:
+  - restart bind
+
+- name: Debian | Configure Primary DNS Server
+  block:
+    - name: Debian | Populate {{ bind_data_dir }} Internal Zone
+      template: 
+        src: "files/db.{{ dns_zone }}"
+        dest: "{{ bind_data_dir }}/db.{{ dns_zone }}"
+        owner: "{{ bind_user }}"
+        group: "{{ bind_user }}"
+        mode: 0644
+        validate: "named-checkzone {{ dns_zone }} %s"
+      notify:
+      - restart bind
+
+    - name: Debian | Populate {{ bind_data_dir }} Reverse Zone
+      template: 
+        src: "files/db.{{ dns_reverse_zone }}"
+        dest: "{{ bind_data_dir }}/db.{{ dns_reverse_zone }}"
+        owner: "{{ bind_user }}"
+        group: "{{ bind_user }}"
+        mode: 0644
+        validate: "named-checkzone {{ dns_reverse_zone }}.in-addr.arpa %s"
+      notify:
+      - restart bind
+
+    - name: Debian | Populate {{ dns_ironmaiden_zone }} Ironmaiden Zone
+      template: 
+        src: "files/db.{{ dns_ironmaiden_zone }}"
+        dest: "{{ bind_data_dir }}/db.{{ dns_ironmaiden_zone }}"
+        owner: "{{ bind_user }}"
+        group: "{{ bind_user }}"
+        mode: 0644
+        validate: "named-checkzone {{ dns_ironmaiden_zone }} %s"
+      notify:
+      - restart bind
+
+    - name: Debian | Copy {{ bind_config_file }} Configuration File
+      template: 
+        src: "{{ bind_config_file }}.primary.j2"
+        dest: "/etc/bind/{{ bind_config_file }}"
+        owner: root
+        group: "{{ bind_user }}"
+        mode: 0640
+        validate: "named-checkconf %s"
+      notify:
+      - restart bind
+  when: "'primary' in group_names"
+
+- name: Debian | Configure Secondary DNS Server
+  block:
+    - name: Debian | Populate {{ bind_data_dir }} Internal Zone
+      template: 
+        src: "files/db.{{ dns_zone }}"
+        dest: "{{ bind_data_dir }}/db.{{ dns_zone }}"
+        owner: "{{ bind_user }}"
+        group: "{{ bind_user }}"
+        mode: 0644
+        validate: "named-checkzone {{ dns_zone }} %s"
+      notify:
+      - restart bind
+
+    - name: Debian | Populate {{ bind_data_dir }} Reverse Zone
+      template: 
+        src: "files/db.{{ dns_reverse_zone }}"
+        dest: "{{ bind_data_dir }}/db.{{ dns_reverse_zone }}"
+        owner: "{{ bind_user }}"
+        group: "{{ bind_user }}"
+        mode: 0644
+        validate: "named-checkzone {{ dns_reverse_zone }}.in-addr.arpa %s"
+      notify:
+      - restart bind
+
+    - name: Debian | Populate {{ dns_ironmaiden_zone }} Ironmaiden Zone
+      template: 
+        src: "files/db.{{ dns_ironmaiden_zone }}"
+        dest: "{{ bind_data_dir }}/db.{{ dns_ironmaiden_zone }}"
+        owner: "{{ bind_user }}"
+        group: "{{ bind_user }}"
+        mode: 0644
+        validate: "named-checkzone {{ dns_ironmaiden_zone }} %s"
+      notify:
+      - restart bind
+
+    - name: Debian | Copy {{ bind_config_file }} Configuration File
+      template: 
+        src: "{{ bind_config_file }}.secondary.j2"
+        dest: "/etc/bind/{{ bind_config_file }}"
+        owner: root
+        group: "{{ bind_user }}"
+        mode: 0640
+        validate: "named-checkconf %s"
+      notify:
+      - restart bind
+  when: "'secondary' in group_names"
+

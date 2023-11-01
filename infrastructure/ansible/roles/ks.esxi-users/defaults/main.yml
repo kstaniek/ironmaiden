@@ -1,0 +1,7 @@
+---
+# define in secure.yml
+# users:
+#   - name: username
+#     password: password
+#     description: Description
+#     pub_key: pub_key

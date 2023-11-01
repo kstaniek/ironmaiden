@@ -1,0 +1,6 @@
+packages:
+- systemd-timesyncd
+
+systemd_service: systemd-timesyncd
+
+ntp_server: 172.31.13.254

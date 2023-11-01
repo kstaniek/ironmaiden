@@ -1,0 +1,19 @@
+dns:
+  children:
+    primary:
+      hosts:
+        ns1: 
+          ansible_host: 172.31.20.50
+    secondary:
+      hosts:
+        ns2: 
+          ansible_host: 172.31.20.51
+
+pi:
+  hosts:
+    pi1:
+      ansible_host: 172.31.20.105
+          
+      
+      
+

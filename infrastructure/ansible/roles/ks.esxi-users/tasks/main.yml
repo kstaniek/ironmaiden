@@ -1,0 +1,3 @@
+---
+- include: setup-VMkernel.yml
+  when: ansible_os_family == 'VMkernel'

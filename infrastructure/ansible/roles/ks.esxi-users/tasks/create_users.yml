@@ -1,0 +1,29 @@
+---
+- name: Get list of accounts
+  shell: "esxcli system account list | grep '{{ outer_item.name }}'"
+  register: usr_exists
+  ignore_errors: true
+  failed_when: "usr_exists.rc == 1"
+
+- name: Add new user
+  command: "esxcli system account add -i '{{ outer_item.name }}' -p '{{ outer_item.password }}' -c '{{ outer_item.password }}' -d '{{ outer_item.description }}'"
+  when: usr_exists is failed
+
+- name: Update existing user
+  command: "esxcli system account set -i '{{ outer_item.name }}' -p '{{ outer_item.password }}' -c '{{ outer_item.password }}' -d '{{ outer_item.description }}'"
+  when: usr_exists is not failed
+
+- name: Set Admin role
+  command: "esxcli system permission set --id '{{ outer_item.name }}'  -r Admin"
+
+- name: Ensure public key directory for {{ outer_item.name }} exists
+  file: path=/etc/ssh/keys-{{ outer_item.name }} state=directory
+
+- name: Copy Public Key
+  ansible.builtin.copy:
+    content: "{{ outer_item.pub_key }}"
+    dest: "/etc/ssh/keys-{{ outer_item.name }}/authorized_keys"
+    # group: "{{ outer_item.name }}"
+    owner: "{{ outer_item.name }}"
+    mode: '0600'
+  

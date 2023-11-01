@@ -1,0 +1,24 @@
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name node-exporter
+  namespace: monitoring
+spec:
+  staticConfigs:
+    - targets:
+      - amp-terrace.home.staniek.name:9100
+      - amp-alice.home.staniek.name:9100
+      - amp-kitchen.home.staniek.name:9100
+      - amp-julia.home.staniek.name:9100
+      - amp-bathroom.home.staniek.name:9100
+      - amp-masterbathroom.home.staniek.name:9100
+      - amp-masterbedroom.home.staniek.name:9100
+      - amp-emily.home.staniek.name:9100
+      - amp-wc.home.staniek.name:9100
+      # - amp-office.home.staniek.name:9100
+  metricsPath: /metrics
+  relabelings:
+    - action: replace
+      targetLabel: job
+      replacement: *name

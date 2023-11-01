@@ -1,0 +1,20 @@
+
+
+- name: Provision bare metal machines
+  hosts: dns
+  vars:
+    database_name: '/var/lib/powerdns/db.sqlite'
+    pdns_config:
+      master: true
+      slave: false
+      local-address: '172.31.11.88'
+    pdns_backends:
+      gsqlite3:
+        database: "{{ database_name }}"
+        dnssec: yes
+    pdns_sqlite_databases_locations:
+      - "{{ database_name }}"
+  roles:
+    - rpi-core
+    - { role: PowerDNS.pdns }
+    

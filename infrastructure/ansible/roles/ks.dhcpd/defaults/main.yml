@@ -1,0 +1,22 @@
+---
+## Default variables for the role. These variables have the lowest
+## priority of any variables available, and can be easily overridden 
+## by any other variable, including inventory variables.
+
+packages:
+- isc-dhcp-server
+
+systemd_service: "isc-dhcp-server"
+firewall_port: "dhcp"
+firewall_dhcp_failover_port: "647"
+
+# rndc_key:
+# DNS update key, generated with `rndc-confgen -A hmac-sha256 -a -b 512 -r /dev/urandom`
+# stored in ansible vault defaults/secure.yml
+
+dhcpd_config_file: "dhcpd.conf"
+
+bind_primary_server_address: "172.31.20.50"
+bind_secondary_server_address: "172.31.20.51"
+tftp_next_server: "172.31.20.200"
+

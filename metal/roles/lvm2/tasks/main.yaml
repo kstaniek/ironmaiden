@@ -1,0 +1,4 @@
+- name: Install lvm2
+  ansible.builtin.package:
+    name: lvm2
+    state: present
