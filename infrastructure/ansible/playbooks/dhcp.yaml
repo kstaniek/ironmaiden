@@ -23,5 +23,5 @@
       register: bind_config
   roles:
     - role: ks.dhcpd
-      vars: 
+      vars:
         rndc_key: "{{bind_config.field}}"

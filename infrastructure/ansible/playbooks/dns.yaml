@@ -7,37 +7,35 @@
     - onepassword.connect
     - community.sops
   pre_tasks:
-  - name: Load network topology into the global namespace
-    community.sops.load_vars:
-      file: network_topology.sops.yaml
-  - name: Load onepassword token variable into the global namespace
-    community.sops.load_vars:
-      file: onepassword.sops.yaml
-  - name: Find the item with the label "Bind9" in the vault "Services"
-    delegate_to: localhost
-    item_info:
-      token: "{{ connect_token }}"
-      vault: Services
-      item: bind
-      field: rndc-key-secret
-    no_log: true
-    register: rndc_key_secret
-  - name: Find the item with the label "Bind9" in the vault "Services"
-    delegate_to: localhost
-    item_info:
-      token: "{{ connect_token }}"
-      vault: Services
-      item: bind
-      field: externaldns_secret
-    no_log: true
-    register: externaldns_secret
+    - name: Load network topology into the global namespace
+      community.sops.load_vars:
+        file: network_topology.sops.yaml
+    - name: Load onepassword token variable into the global namespace
+      community.sops.load_vars:
+        file: onepassword.sops.yaml
+    - name: Find the item with the label "Bind9" in the vault "Services"
+      delegate_to: localhost
+      item_info:
+        token: "{{ connect_token }}"
+        vault: Services
+        item: bind
+        field: rndc-key-secret
+      no_log: true
+      register: rndc_key_secret
+    - name: Find the item with the label "Bind9" in the vault "Services"
+      delegate_to: localhost
+      item_info:
+        token: "{{ connect_token }}"
+        vault: Services
+        item: bind
+        field: externaldns_secret
+      no_log: true
+      register: externaldns_secret
   roles:
     - role: ks.bind
-      vars: 
+      vars:
         rndc_key: "{{rndc_key_secret.field}}"
         externaldns: "{{externaldns_secret.field}}"
     # - ks.staticip
     # - bertvv.bind
     #   rndc_key
-  
-    

@@ -22,8 +22,8 @@
     path: "{{ mount_point }}"
     fstype: ext4
     state: mounted
-    boot: yes
-    backup: yes
+    boot: true
+    backup: true
 
 - name: Apply label 'node.longhorn.io/create-default-disk=true' on storage nodes in Kubernetes
   become: true

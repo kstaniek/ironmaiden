@@ -6,4 +6,3 @@ collections:
 roles:
   - name: bertvv.bind
     version: "==5.1.0"
-    

@@ -38,7 +38,7 @@
         group: root
         mode: 0644
       notify:
-      - restart dhcpd
+        - restart dhcpd
   when: "'secondary' in group_names"
 
 - name: Debian | Start and Enable Service {{ systemd_service }}

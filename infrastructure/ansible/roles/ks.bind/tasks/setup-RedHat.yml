@@ -141,7 +141,7 @@
       - "1"
 
 - name: RedHat | Copy {{ bind_exporter_systemd_service }} Systemd File
-  template: 
+  template:
     src: "{{ bind_exporter_systemd_service }}.j2"
     dest: "/etc/systemd/system/{{ bind_exporter_systemd_service }}"
     owner: root
@@ -149,7 +149,7 @@
     mode: 0644
 
 - name: RedHat | systemctl daemon-reload
-  command: systemctl daemon-reload 
+  command: systemctl daemon-reload
 
 - name: RedHat | Start and Enable Service {{ bind_exporter_systemd_service }}
   service:

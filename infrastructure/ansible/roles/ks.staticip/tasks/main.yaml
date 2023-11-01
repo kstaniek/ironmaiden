@@ -12,8 +12,8 @@
     ip4: "{{ansible_default_ipv4.address}}/24"
     gw4: 172.31.11.254
     dns4:
-    - 127.0.0.1
-    - 208.67.222.222
-    - 208.67.220.220
+      - 127.0.0.1
+      - 208.67.222.222
+      - 208.67.220.220
     autoconnect: true
     state: present

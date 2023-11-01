@@ -10,10 +10,9 @@
     pdns_backends:
       gsqlite3:
         database: "{{ database_name }}"
-        dnssec: yes
+        dnssec: true
     pdns_sqlite_databases_locations:
       - "{{ database_name }}"
   roles:
     - rpi-core
     - { role: PowerDNS.pdns }
-    
