@@ -215,14 +215,19 @@ network_topology:
               fqdn: ENC[AES256_GCM,data:JEJS4w0DHiD0Gn7TwaV3hhsNqErfX0z7,iv:ljS8m+C7RF8WSr9gae9ZQDqYtKadu0fWWPCrQGelas4=,tag:RSZuX9tNOt47KghZ3GkEhQ==,type:str]
               dhcp:
                 mac: ENC[AES256_GCM,data:egkW8Xc/91w+zMuKMX4ILa0=,iv:D9UfF+cDgH0JupRmBdQMSWpz2ntbPIt0GjRKMQN+aEg=,tag:nZCYv0iXmgAHcQmVtyMrHQ==,type:str]
+            - address: ENC[AES256_GCM,data:V0Q2oFu5DtjBJSwT,iv:n0m8TVsVC8rbR2EcVBBRrQaZUcPJO0jhNToVN9thRQM=,tag:ww0e1P5PEhP3t6F7RIa9Bg==,type:str]
+              hostname: ENC[AES256_GCM,data:E0n3Ck4iIBjnQg==,iv:5aeDdx1SSJna5+crcjv4xTJOLETbq+8qdBYlnFxwU38=,tag:09ZABOcQnsFGZPFJ1th28Q==,type:str]
+              fqdn: ENC[AES256_GCM,data:9669FwfjJMcRiGMaKAsK2th0u3vfk6tI3NkjmQ==,iv:yWzBzvOGqjVxN+hJOYYQJYtK44PLioouep0wYv4Vqjc=,tag:x3ugdGpKjctwdzFDXxm2WQ==,type:str]
+              dhcp:
+                mac: ENC[AES256_GCM,data:gQQH3bLW/iytIY1uiP0FAX8=,iv:LWuXrlhP+6HegNI9vT3x6cOLhKjO+iVYnnTIy35e3x8=,tag:nZTmOwjpAjncZf6ntbU4NQ==,type:str]
             - address: ENC[AES256_GCM,data:WO3MJBknnFuLg7b7,iv:FWxGiMw7chlFdTuXkfNOurj4ufS6Z5hOepoDXSPk614=,tag:Tc1//gy7xzV28usHybhuPQ==,type:str]
               hostname: ENC[AES256_GCM,data:six76jo4ZKs=,iv:TUQmojm6uWB/8m7DkbdN+l0y4dV+JRHh0cKOw7U2Wis=,tag:Q5zq9733SwHYsXCbEinFTA==,type:str]
               fqdn: ENC[AES256_GCM,data:8bv7ja3V5rY5NuuJx9aa/meKvBJB3JAvbRU=,iv:0vp59Uqo6u4qZ31YedrTq2ACPiXcySrfesEvo5NfkFg=,tag:mdjlUvEjL20jMpxD2cpvFA==,type:str]
               dhcp:
                 mac: ENC[AES256_GCM,data:tIqKhKGKtqhRVWccz2Gfv88=,iv:/uBJWnddv3WqsE061LXIVYTKdmu0TjZwMzdOMoEIQOk=,tag:0/U9sjXcguJfpWyQF+ycFw==,type:str]
             - address: ENC[AES256_GCM,data:zPSaYEaw4W8akXpq,iv:+pvZZ44nR2LMLPw038HjbF7EG5txfmtLnVUUhLjGkEM=,tag:nFxUA80Angk51TwqXFrTjg==,type:str]
-              hostname: ENC[AES256_GCM,data:RIUwAgtgvM6m+Q==,iv:Ot9PQaCrJ7RTqTKf0MuaoSvCSgLvhjEZUrN+nKIT82s=,tag:Bw8ounKM3dS3rUBUSLUzdw==,type:str]
-              fqdn: ENC[AES256_GCM,data:QD0SJmjBDh/bNK4XYOiTG0daYZWy6wT7zaV4lQ==,iv:K9vI7mmRGemxdRPFTPWpj8g+mnU9BJLULqjKxOj0ArU=,tag:hi0xQFUHPlTiUnD7LytZLw==,type:str]
+              hostname: ENC[AES256_GCM,data:GvI8ug7UQYDmMIX1OA==,iv:dh7NR9TSY9xTwxDXjcdcqsbFGjOhRABMnJ/XXI6Q3j0=,tag:q6r5y2Mm6xqextoC5i8JUw==,type:str]
+              fqdn: ENC[AES256_GCM,data:K1IJpx2QdytU5GSEQDCUgR0Q1CWOvN7GGbN62yxgBA==,iv:gE2prHdnwOQuTnHyXeQ52N9SAV2zJ1OEaYP5aUoRphQ=,tag:Ue9GC8PyLL0ApeLtmHsVpg==,type:str]
               dhcp:
                 mac: ENC[AES256_GCM,data:zwHFrHFGoLd7+NuvM9VnKWg=,iv:fXxQxx6kMQCi7YIi8bh46NokJu/iWnQ1RDaPF0eVlx8=,tag:DM3nckYrFYSrU9NUqRgkJA==,type:str]
             - address: ENC[AES256_GCM,data:SeaxQTVJe15W4tB8,iv:kN77GNEEltwAq3e5O83XCabw0AC/8Ym2yBPpLvNq1sI=,tag:RmsBJXTTiFJ8S6SzOjQ6Bw==,type:str]
@@ -362,6 +367,11 @@ network_topology:
               fqdn: ENC[AES256_GCM,data:ng6RNB8fEswiwXNySMp9uHkyQ6TUufRrkyR9nfxRkNasHCo=,iv:35PYxsMStB0zu1hvmS07z2xLl3f0d5IkqB1z6d3YkiA=,tag:KmZWgHkA5vH12xbSyhND8w==,type:str]
               dhcp:
                 mac: ENC[AES256_GCM,data:Mv1Mw01JceHQeFuVB1wnjkk=,iv:LY9iRaHnClM8EyBGd0oWaqRl6nhjcCbH1uWkgSyixvk=,tag:mSN0Bxv3kJzW4WIBbSa5UQ==,type:str]
+            - address: ENC[AES256_GCM,data:D25AktEO0jPbI2ds,iv:KOL+bRugHdpmNQYOypWxe8jf0gvAypxxzMomSZHU/0w=,tag:TNEpnSs+W3yUyQ2M2P3EYQ==,type:str]
+              hostname: ENC[AES256_GCM,data:fp5rzNgFBH4A5u9m,iv:pAN9Ln8EmYGfdiQUbEg0ui9/wBDd+eNg1yU7ghW6WR4=,tag:+7Pz6NXnScVfudLICTCwQw==,type:str]
+              fqdn: ENC[AES256_GCM,data:1WIDA1NW1Rbh2jppZU/ZhFtLHLEmCaNtcy2N5jLO,iv:70Nbeyi1fOp7vYDFgOrjeXsAsmHKlEQpk9nANl22AwM=,tag:VX9VJlkU7H0M9UrOQbK1aQ==,type:str]
+              dhcp:
+                mac: ENC[AES256_GCM,data:o6lGFeZqqWQ2NsPWYW4YtbQ=,iv:BcTQC1RGI7FMHpoeTLnUvYNO0SIUOxuJ3P6QnH2rQDA=,tag:bAgTy5xpaZ9mcRemfwGxiQ==,type:str]
             - address: ENC[AES256_GCM,data:CAOx9r9JKEL2If+rUQ==,iv:7fHVZQNXe+UXDJ0/5bRkcHRdRequKX0LN2ORmVocaoo=,tag:QZ1l4if99ydR6SGAnkkp8w==,type:str]
               hostname: ENC[AES256_GCM,data:v05gWJIDaME0760MSaWT0jcAhKAYkw==,iv:yuaO6j5PsrU08WoEe1Flp+Ng1qMP05SCpYnmaULhd7M=,tag:r9BntWcWRBxkDxeGWi9X3A==,type:str]
               fqdn: ENC[AES256_GCM,data:ng6RNB8fEswiwXNySMp9uHkyQ6TUufRrkyR9nfxRkNasHCo=,iv:35PYxsMStB0zu1hvmS07z2xLl3f0d5IkqB1z6d3YkiA=,tag:KmZWgHkA5vH12xbSyhND8w==,type:str]
@@ -470,8 +480,8 @@ sops:
             dGJHT0I3alpKcVUvc1MvcFpLUVlRZDQKuik/aywnkF3Ahql2x2AMYHFWJWZ7e86N
             sudEsIRr1kRqcQ2J57F905U0XwZothAg9++SAlXaTIGi2rzQ0zMWZA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-24T08:03:46Z"
-    mac: ENC[AES256_GCM,data:QbrhXq7XQ4QG0hwM8RY6/KZss1XweSPi8vrmy811UhQipjG17MBpQZwBJjOQSX5ut1x/3TEbdXI4tvZsWax9JqXzPx0DfX9/OgXmVc6SsKu9a5heZ0fIuBOjxAKm+6janNjxv15w+32wXHdnpPswmAEmX66iHTm0rBBbj1KtV9Y=,iv:l0sGRewtPXmaWZA8HkQf39m0v2InZGZQdt+4WyLxG28=,tag:6XljAfNQqf2PlJtBI+8dXg==,type:str]
+    lastmodified: "2023-11-03T18:30:09Z"
+    mac: ENC[AES256_GCM,data:DBI/NJPusAl8sdIlXudPPmJCoBnNaoZaOr2dMAvYr5BwlhKcGLOsVbDmntfBUhTJrUGhIh2u4EHQEaMRpfRvHstLHPtJEOnOO0MgcEuJKImCPj6Q1B4c2DSBNNIyjrYk7jWd8UUjHBt8EedqWtM7SRoiRsYvEiISQVbNiZRNrQ4=,iv:nL3NlgSLq32kzn4aZr4+8qe/DRH+vmhvVUNlQuBTK0I=,tag:AETTSrioV54AzizHQdWHJw==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.8.1

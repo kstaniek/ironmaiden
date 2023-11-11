@@ -45,6 +45,7 @@ $ORIGIN 31.172.in-addr.arpa.
 200.10                 IN  PTR  printer.home.staniek.name.
 254.10                 IN  PTR  gw-vlan10.home.staniek.name.
 4.11                   IN  PTR  braava.home.staniek.name.
+33.11                  IN  PTR  samsung-tv.home.staniek.name.
 35.11                  IN  PTR  doorbird.home.staniek.name.
 39.11                  IN  PTR  chromecast.home.staniek.name.
 95.11                  IN  PTR  roomba.home.staniek.name.
@@ -55,10 +56,10 @@ $ORIGIN 31.172.in-addr.arpa.
 4.12                   IN  PTR  smog.home.staniek.name.
 5.12                   IN  PTR  alexa.home.staniek.name.
 6.12                   IN  PTR  plug01.home.staniek.name.
-7.11                   IN  PTR  bulb01.home.staniek.name.
-8.11                   IN  PTR  plug02.home.staniek.name.
-9.11                   IN  PTR  node01.home.staniek.name.
-10.11                  IN  PTR  node02.home.staniek.name.
+7.12                   IN  PTR  bulb01.home.staniek.name.
+8.12                   IN  PTR  plug02.home.staniek.name.
+9.12                   IN  PTR  node01.home.staniek.name.
+10.12                  IN  PTR  node02.home.staniek.name.
 11.12                  IN  PTR  plug03.home.staniek.name.
 12.12                  IN  PTR  plug04.home.staniek.name.
 13.12                  IN  PTR  plug05.home.staniek.name.
@@ -75,6 +76,7 @@ $ORIGIN 31.172.in-addr.arpa.
 15.12                  IN  PTR  gardenlightcube01.home.staniek.name.
 109.12                 IN  PTR  gardenlightlargesphere.home.staniek.name.
 98.12                  IN  PTR  gardenlight05.home.staniek.name.
+55.12                  IN  PTR  shelly-pixar.home.staniek.name.
 254.12                 IN  PTR  gw-vlan12.home.staniek.name.
 1.21                   IN  PTR  packer.home.staniek.name.
 254.21                 IN  PTR  gw-vlan21.home.staniek.name.
