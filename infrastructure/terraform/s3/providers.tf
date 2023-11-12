@@ -1,9 +1,6 @@
 provider "minio" {
   alias  = "nas"
-  minio_server   = "s3.us-east-005.backblazeb2.com"
-  minio_user     = "admin"
-  minio_password = "admin"
-}
-
-provider "b2" {
+  minio_server   = "s3.home.staniek.name:9091"
+  minio_user     = module.onepassword_item_minio.fields.admin_username
+  minio_password = module.onepassword_item_minio.fields.admin_password
 }

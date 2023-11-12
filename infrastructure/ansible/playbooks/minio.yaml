@@ -1,0 +1,33 @@
+---
+- name: Configure and Install Minio Server
+  hosts: minio
+  environment:
+    OP_CONNECT_HOST: http://172.31.30.1:8080
+  collections:
+    - onepassword.connect
+    - community.sops
+  pre_tasks:
+    - name: Load onepassword token variable into the global namespace
+      community.sops.load_vars:
+        file: onepassword.sops.yaml
+    - name: Find the item with the label "Minio" in the vault "Services"
+      item_info:
+        token: "{{ connect_token }}"
+        vault: Services
+        item: minio
+      no_log: true
+      register: minio_config
+  roles:
+    - role: ks.storage
+      vars:
+        device: /dev/sdb
+        partition: /dev/sdb1
+        mount_point: /mnt/data
+    - role: ks.minio
+      vars:
+        minio_server_datadirs:
+          - /mnt/data
+        minio_server_make_datadirs: true
+        minio_root_user: "{{ minio_config.op_item.fields.admin_username.value }}"
+        minio_root_password: "{{ minio_config.op_item.fields.admin_password.value }}"
+

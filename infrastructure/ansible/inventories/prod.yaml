@@ -14,3 +14,8 @@ pi:
   hosts:
     pi1:
       ansible_host: 172.31.20.105
+
+minio:
+  hosts:
+    s3:
+      ansible_host: 172.31.30.60

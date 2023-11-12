@@ -1,0 +1,4 @@
+---
+device: /dev/sdb
+partition: /dev/sdb1
+mount_point: /mnt/data

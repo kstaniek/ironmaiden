@@ -3,24 +3,22 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
-  name: oci-terraform-powerdns
+  name: oci-terraform-s3
   namespace: infrastructure
 spec:
   interval: 1m
-  url: oci://ghcr.io/kstaniek/terraform/powerdns
+  url: oci://ghcr.io/kstaniek/terraform/s3
   ref:
     tag: main
 ---
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: powerdns
+  name: s3
   namespace: infrastructure
 spec:
-  parallelism: 1
   interval: 12h
   approvePlan: "auto"
-  force: true
   backendConfig:
     disable: true
   cliConfigSecretRef:
@@ -28,7 +26,7 @@ spec:
   path: "./"
   sourceRef:
     kind: OCIRepository
-    name: oci-terraform-powerdns
+    name: oci-terraform-s3
     namespace: infrastructure
   runnerPodTemplate:
     spec:

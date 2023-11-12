@@ -95,6 +95,7 @@ metal1                     IN  A      172.31.30.11
 metal2                     IN  A      172.31.30.12
 metal3                     IN  A      172.31.30.13
 metal4                     IN  A      172.31.30.14
+s3                         IN  A      172.31.30.60
 gw-vlan30                  IN  A      172.31.30.254
 gw-vlan13                  IN  A      172.31.13.254
 bilbo                      IN  CNAME  gw-vlan13

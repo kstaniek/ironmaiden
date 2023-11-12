@@ -13,3 +13,8 @@ dns:
     # ns1: {ansible_host: 172.31.30.50, mac: 00:50:56:31:30:50, disk: sda, network_interface: ens192}
     # ns2: {ansible_host: 172.31.30.51, mac: 00:50:56:31:30:51, disk: sda, network_interface: ens192}
     ns1: {ansible_host: 172.31.11.88}
+
+minio:
+  hosts:
+    # VM temporary
+    s3: {ansible_host: 172.31.30.60, mac: '00:50:56:31:30:60', disk: sda, network_interface: ens192}

@@ -21,6 +21,10 @@ dhcp-boot=tag:efi-x86_64,grubx64.efi
 dhcp-host={{ hostvars[item].mac }},{{ hostvars[item].ansible_host }},{{ item }}
 {% endfor %}
 
+{% for item in groups['minio'] %}
+dhcp-host={{ hostvars[item].mac }},{{ hostvars[item].ansible_host }},{{ item }}
+{% endfor %}
+
 {% endif %}
 # Log DHCP queries to stdout
 log-queries

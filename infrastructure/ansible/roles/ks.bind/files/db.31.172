@@ -94,5 +94,6 @@ $ORIGIN 31.172.in-addr.arpa.
 12.30                  IN  PTR  metal2.home.staniek.name.
 13.30                  IN  PTR  metal3.home.staniek.name.
 14.30                  IN  PTR  metal4.home.staniek.name.
+60.30                  IN  PTR  s3.home.staniek.name.
 254.30                 IN  PTR  gw-vlan30.home.staniek.name.
 254.13                 IN  PTR  gw-vlan13.home.staniek.name.

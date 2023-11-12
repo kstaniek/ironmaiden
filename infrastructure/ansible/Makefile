@@ -27,3 +27,9 @@ timesyncd:
 	ansible-playbook \
 		--inventory inventories/${env}.yaml \
 		playbooks/timesyncd.yaml	
+
+minio:
+	ansible-playbook \
+		--inventory inventories/${env}.yaml \
+		playbooks/minio.yaml
+

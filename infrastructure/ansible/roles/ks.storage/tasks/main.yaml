@@ -1,0 +1,27 @@
+---
+- name: Partition the disk into a single large partition filling the disk
+  become: true
+  parted:
+    device: "{{ device }}"
+    number: 1
+    state: present
+    part_start: "0%"
+    part_end: "100%"
+    unit: GB
+
+- name: Create filesystem on new partition
+  become: true
+  filesystem:
+    fstype: ext4
+    dev: "{{ partition }}"
+
+- name: Mount drive on {{ mount_point }}
+  become: true
+  mount:
+    src: "{{ partition }}"
+    path: "{{ mount_point }}"
+    fstype: ext4
+    state: mounted
+    boot: true
+    backup: true
+

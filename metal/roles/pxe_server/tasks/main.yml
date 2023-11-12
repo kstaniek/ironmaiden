@@ -41,6 +41,13 @@
     mode: 0644
   loop: "{{ groups['metal'] }}"
 
+- name: Generate init config for minio
+  ansible.builtin.template:
+    src: kickstart.ks.minio.j2
+    dest: "{{ role_path }}/files/data/init-config/{{ hostvars[item]['mac'] }}.ks"
+    mode: 0644
+  loop: "{{ groups['minio'] }}"
+
 - name: Start the ephemeral PXE server
   community.docker.docker_compose:
     project_src: "{{ role_path }}/files"
