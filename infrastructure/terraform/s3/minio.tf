@@ -2,7 +2,6 @@ locals {
   minio_buckets = [
     "volsync",
     "crunchy-postgres",
-    "test-bucket",
   ]
 }
 
