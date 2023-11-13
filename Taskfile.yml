@@ -8,6 +8,10 @@ includes:
     dir: .taskfiles/flux
     taskfile: .taskfiles/flux
 
+  k8s:
+    taskfile: .taskfiles/k8s
+    dir: .taskfiles/k8s
+
   externalsecrets:
     taskfile: .taskfiles/externalsecrets
     dir: .taskfiles/externalsecrets
