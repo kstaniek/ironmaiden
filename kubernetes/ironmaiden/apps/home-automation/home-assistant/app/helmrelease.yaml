@@ -99,6 +99,8 @@ spec:
             port: 8123
           code-server:
             port: 8080
+          matter-server:
+            port: 5580
     ingress:
       main:
         enabled: true
