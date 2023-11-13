@@ -49,10 +49,6 @@ spec:
           nodeSelector:
             homeassistant.feature.node.kubernetes.io/skyconnect: "true"
         containers:
-          volumes:
-            - name: ttyusb
-              hostPath:
-                path: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
           main:
             image:
               repository: ghcr.io/home-assistant/home-assistant
@@ -66,6 +62,9 @@ spec:
             envFrom:
               - secretRef:
                   name: home-assistant-secret
+            volumeMounts:
+              - mountPath: /dev/ttyUSB0
+                name: ttyusb
             probes:
               liveness:
                 enabled: false
@@ -79,11 +78,6 @@ spec:
                 memory: 1254M
               limits:
                 memory: 1254M
-            securytyContext:
-              privileged: true
-            volumeMounts:
-              - mountPath: /dev/ttyUSB0
-                name: ttyusb
             
           code-server:
             image:
@@ -159,3 +153,7 @@ spec:
         globalMounts:
           - path: /root/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
+    volumes:
+      - name: ttyusb
+        hostPath:
+          path: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
