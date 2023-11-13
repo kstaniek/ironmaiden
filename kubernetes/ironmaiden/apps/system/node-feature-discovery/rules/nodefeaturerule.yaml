@@ -13,3 +13,11 @@ spec:
         - feature: usb.device
           matchExpressions:
             vendor: { op: In, value: ["1a6e", "18d1"] }
+    - # SkyConnect
+      name: homeassistant.skyconnect
+      labels:
+        homeassistant.feature.node.kubernetes.io/skyconnect: "true"
+      matchFeatures:
+        - feature: usb.device
+          matchExpressions:
+            vendor: { op: In, value: ["10c4", "ea60"] }
