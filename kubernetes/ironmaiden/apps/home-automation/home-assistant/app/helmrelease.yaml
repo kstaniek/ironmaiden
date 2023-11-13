@@ -153,7 +153,7 @@ spec:
         globalMounts:
           - path: /root/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
-    volumes:
-      - name: ttyusb
-        hostPath:
-          path: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
+      ttyusb:
+        type: hostPath
+        hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
+
