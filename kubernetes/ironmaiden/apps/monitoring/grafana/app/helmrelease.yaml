@@ -81,8 +81,8 @@ spec:
             jsonData:
               implementation: prometheus
         deleteDatasources:
-          # - name: Loki
-          #   orgId: 1
+          - name: Loki
+            orgId: 1
           - name: Alertmanager
             orgId: 1
 

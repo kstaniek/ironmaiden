@@ -142,7 +142,7 @@ spec:
             apiVersion: v2
         enableAdminAPI: true
         externalLabels:
-          cluster: ironmainden
+          cluster: ironmaiden
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         replicas: 1
