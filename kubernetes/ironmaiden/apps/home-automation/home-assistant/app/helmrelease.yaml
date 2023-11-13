@@ -140,3 +140,7 @@ spec:
         globalMounts:
           - path: /root/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
+
+    nodeSelector:
+      homeassistant.feature.node.kubernetes.io/skyconnect": "true"
+
