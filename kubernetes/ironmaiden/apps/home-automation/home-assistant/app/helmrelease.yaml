@@ -46,7 +46,8 @@ spec:
                 "namespace": "network",
                 "ips": ["172.31.12.253/24"]
               }]
-
+          nodeSelector:
+            homeassistant.feature.node.kubernetes.io/skyconnect: "true"
         containers:
           main:
             image:
@@ -140,7 +141,3 @@ spec:
         globalMounts:
           - path: /root/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
-
-    nodeSelector:
-      homeassistant.feature.node.kubernetes.io/skyconnect: "true"
-
