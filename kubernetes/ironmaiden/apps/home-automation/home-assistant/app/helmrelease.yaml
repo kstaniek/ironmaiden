@@ -90,7 +90,8 @@ spec:
               - "/config"
           matter-server:
             image:
-              repository: ghcr.io/home-assistant-libs/python-matter-server:stable
+              repository: ghcr.io/home-assistant-libs/python-matter-server
+              tag: 4.0.2
 
     service:
       main:
