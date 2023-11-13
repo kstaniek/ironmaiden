@@ -88,6 +88,9 @@ spec:
               - --port
               - "8080"
               - "/config"
+          matter-server:
+            image:
+              repository: ghcr.io/home-assistant-libs/python-matter-server:stable
 
     service:
       main:
