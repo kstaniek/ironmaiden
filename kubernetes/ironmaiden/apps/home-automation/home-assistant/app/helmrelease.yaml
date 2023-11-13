@@ -142,5 +142,5 @@ spec:
             subPath: GH_DEPLOY_KEY
 
     nodeSelector:
-      homeassistant.feature.node.kubernetes.io/skyconnect": "true"
+      homeassistant.feature.node.kubernetes.io/skyconnect: "true"
 
