@@ -134,6 +134,14 @@ spec:
               - *code-host
 
     persistence:
+      dev-bus-usb:
+        type: hostPath
+        hostPath: /dev/bus/usb
+        hostPathType: Directory
+      sys-bus-usb:
+        type: hostPath
+        hostPath: /sys/bus/usb
+        hostPathType: Directory
       deploy-key:
         type: secret
         name: home-assistant-secret
