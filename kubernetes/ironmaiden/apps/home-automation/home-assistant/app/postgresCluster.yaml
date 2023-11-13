@@ -63,6 +63,6 @@ spec:
             differential: "0 1 * * 1-6"
           s3:
             bucket: "crunchy-postgres"
-            entpoint: "s3:http://s3.home.staniek.name:9091"
+            endpoint: "s3:http://s3.home.staniek.name:9091"
             # endpoint: "s3.us-east-005.backblazeb2.com"
-            # region: "us-east-1"
+            region: ""
