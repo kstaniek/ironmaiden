@@ -1,5 +1,6 @@
 locals {
   minio_buckets = [
+    "loki",
     "volsync",
     "crunchy-postgres",
   ]
