@@ -64,5 +64,4 @@ spec:
           s3:
             bucket: "crunchy-postgres"
             endpoint: "s3:http://s3.home.staniek.name:9091"
-            # endpoint: "s3.us-east-005.backblazeb2.com"
-            region: ""
+            region: "pl-south-1"
