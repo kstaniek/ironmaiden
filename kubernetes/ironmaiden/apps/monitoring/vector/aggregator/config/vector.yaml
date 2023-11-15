@@ -37,7 +37,7 @@ transforms:
   remap_syslog:
     inputs:
       - "cisco_syslog"
-      - "cisco_syslog_tcp"
+      # - "cisco_syslog_tcp"
     type:   "remap"
     source: |
             structured = parse_syslog!(.message)
