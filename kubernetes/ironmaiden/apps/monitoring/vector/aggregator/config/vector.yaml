@@ -59,9 +59,14 @@ sinks:
     remove_label_fields: true
     remove_timestamp: true
     labels:
-      app: "{{ custom_app_name }}"
-      namespace: "{{ kubernetes.pod_namespace }}"
-      node: "{{ kubernetes.pod_node_name }}"
+      '"*"': "{{ metadata }}"
+      '"pod_labels_*"': "{{ kubernetes.pod_labels }}"
+      source: vector
+      "{{ event_field }}": "{{ some_other_event_field }}"
+    # labels:
+    #   app: "{{ custom_app_name }}"
+    #   namespace: "{{ kubernetes.pod_namespace }}"
+    #   node: "{{ kubernetes.pod_node_name }}"
 
   loki_cisco:
     type: loki
