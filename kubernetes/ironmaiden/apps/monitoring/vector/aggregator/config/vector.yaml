@@ -34,7 +34,7 @@ transforms:
     inputs:
       - cisco_syslog
     condition: |
-      !includes(["debug"], .severity)
+      !includes(["info"], .severity)
 
   kubernetes_remap:
     type: remap
@@ -59,14 +59,9 @@ sinks:
     remove_label_fields: true
     remove_timestamp: true
     labels:
-      "*": "{{ metadata }}"
-      "pod_labels_*": "{{ kubernetes.pod_labels }}"
-      source: vector
-      "{{ event_field }}": "{{ some_other_event_field }}"
-    # labels:
-    #   app: "{{ custom_app_name }}"
-    #   namespace: "{{ kubernetes.pod_namespace }}"
-    #   node: "{{ kubernetes.pod_node_name }}"
+      app: "{{ custom_app_name }}"
+      namespace: "{{ kubernetes.pod_namespace }}"
+      node: "{{ kubernetes.pod_node_name }}"
 
   loki_cisco:
     type: loki
