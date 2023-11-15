@@ -37,11 +37,11 @@ transforms:
       parse_grok!(.message, "%{SYSLOG5424PRI}(%{NUMBER:log_sequence#})?:( %{NUMBER}:)? [*]%{CISCOTIMESTAMP:timestamp}: %%{CISCO_REASON:facility}-%{INT:severity_level}-%{CISCO_REASON:facility_mnemonic}: %{GREEDYDATA:message}")
 
   filter_severity:
-    type: "filter"
+    type: filter
     inputs:
       - cisco_syslog
     condition: |
-      !includes(["info"], .severity)
+      !includes(["debug"], .severity)
 
   kubernetes_remap:
     type: remap
@@ -73,13 +73,13 @@ sinks:
   loki_cisco:
     type: loki
     inputs:
-      - cisco_parser
+      - filter_severity
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding:
       codec: json
     out_of_order_action: rewrite_timestamp
-    labels:
-      hostname: "{{ host }}"
+    # labels:
+    #   hostname: "{{ host }}"
 
   loki_journal:
     type: loki
