@@ -59,8 +59,8 @@ sinks:
     remove_label_fields: true
     remove_timestamp: true
     labels:
-      '"*"': "{{ metadata }}"
-      '"pod_labels_*"': "{{ kubernetes.pod_labels }}"
+      "*": "{{ metadata }}"
+      "pod_labels_*": "{{ kubernetes.pod_labels }}"
       source: vector
       "{{ event_field }}": "{{ some_other_event_field }}"
     # labels:
