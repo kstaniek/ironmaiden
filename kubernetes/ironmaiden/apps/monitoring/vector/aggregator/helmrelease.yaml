@@ -82,6 +82,10 @@ spec:
           journald-logs:
             enabled: true
             port: 6002
+          cisco-syslog:
+            enabled: true
+            protocol: UDP
+            port: 514
 
     persistence:
       config:
