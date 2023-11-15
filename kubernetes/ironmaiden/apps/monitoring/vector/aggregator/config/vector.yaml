@@ -29,6 +29,14 @@ sources:
 
 # Transformations
 transforms:
+  remap_syslog:
+    inputs:
+      - "cisco_syslog"
+    type:   "remap"
+    source: |
+            structured = parse_syslog!(.message)
+            . = merge(., structured)    
+
   cisco_parser:
     type: remap
     inputs:
@@ -73,7 +81,7 @@ sinks:
   loki_cisco:
     type: loki
     inputs:
-      - filter_severity
+      - remap_syslog
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding:
       codec: json
