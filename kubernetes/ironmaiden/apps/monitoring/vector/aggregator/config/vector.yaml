@@ -43,12 +43,14 @@ transforms:
   #           structured = parse_syslog!(.message)
   #           . = merge(., structured)    
 
+  # . = parse_grok!(.message, "%{SYSLOG5424PRI}(%{NUMBER:log_sequence#})?:( %{NUMBER}:)? [*]%{CISCOTIMESTAMP:timestamp}: %%{CISCO_REASON:facility}-%{INT:severity_level}-%{CISCO_REASON:facility_mnemonic}: %{GREEDYDATA:message}")
+      
   cisco_parser:
     type: remap
     inputs:
       - cisco_syslog
     source: |
-      . = parse_grok!(.message, "%{SYSLOG5424PRI}(%{NUMBER:log_sequence#})?:( %{NUMBER}:)? [*]%{CISCOTIMESTAMP:timestamp}: %%{CISCO_REASON:facility}-%{INT:severity_level}-%{CISCO_REASON:facility_mnemonic}: %{GREEDYDATA:message}")
+      . = (.message)
 
   # filter_severity:
   #   type: filter
