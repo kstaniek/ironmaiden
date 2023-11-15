@@ -65,6 +65,8 @@ spec:
             volumeMounts:
               - mountPath: /dev/ttyUSB0
                 name: ttyusb
+            securityContext:
+              allowPrivilegeEscalation: true
             probes:
               liveness:
                 enabled: false
