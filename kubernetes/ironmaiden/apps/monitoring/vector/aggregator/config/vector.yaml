@@ -78,8 +78,8 @@ sinks:
     encoding:
       codec: json
     out_of_order_action: rewrite_timestamp
-    # labels:
-    #   hostname: "{{ host }}"
+    labels:
+      hostname: "dupa"
 
   loki_journal:
     type: loki
