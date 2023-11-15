@@ -59,8 +59,8 @@ spec:
       repos:
         - name: repo1
           schedules:
-            full: "0 1 * * 0"
-            differential: "0 1 * * 1-6"
+            full: "5 7 * * 0"
+            differential: "5 7 * * 1-6"
           s3:
             bucket: "crunchy-postgres"
             endpoint: "http://s3.home.staniek.name:9091"
