@@ -30,6 +30,7 @@ sources:
 # Transformations
 transforms:
   cisco_parser:
+    type: remap
     inputs:
       - cisco_syslog
     source: |
