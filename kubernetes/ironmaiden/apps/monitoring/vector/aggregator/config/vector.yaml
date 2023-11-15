@@ -29,6 +29,12 @@ sources:
 
 # Transformations
 transforms:
+  cisco_parser:
+    inputs:
+      - cisco_syslog
+    source: |
+      .| = parse_grok!(.message, "%{SYSLOG5424PRI}(%{NUMBER:log_sequence#})?:( %{NUMBER}:)? [*]%{CISCOTIMESTAMP:timestamp}: %%{CISCO_REASON:facility}-%{INT:severity_level}-%{CISCO_REASON:facility_mnemonic}: %{GREEDYDATA:message}")
+
   filter_severity:
     type: "filter"
     inputs:
@@ -66,7 +72,7 @@ sinks:
   loki_cisco:
     type: loki
     inputs:
-      - filter_severity
+      - cisco_parser
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding:
       codec: json
