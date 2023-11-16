@@ -59,9 +59,9 @@ spec:
       repos:
         - name: repo1
           schedules:
-            full: "0 1 * * 0"
-            differential: "0 1 * * 1-6"
+            full: "0 9 * * 0"
+            differential: "0 9 * * 1-6"
           s3:
             bucket: "crunchy-postgres"
-            endpoint: "http://s3.home.staniek.name:9091"
+            endpoint: "s3.home.staniek.name:9091"
             region: "pl-south-1" # must be set
