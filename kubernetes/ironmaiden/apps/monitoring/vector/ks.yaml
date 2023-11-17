@@ -8,7 +8,7 @@ metadata:
 spec:
   interval: 10m
   path: "./kubernetes/ironmaiden/apps/monitoring/vector/aggregator"
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: ironmaiden
@@ -26,7 +26,7 @@ metadata:
 spec:
   interval: 10m
   path: "./kubernetes/ironmaiden/apps/monitoring/vector/agent"
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: ironmaiden

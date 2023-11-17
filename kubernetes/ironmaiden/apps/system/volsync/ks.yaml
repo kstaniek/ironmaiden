@@ -8,7 +8,7 @@ metadata:
 spec:
   interval: 10m
   path: "./kubernetes/ironmaiden/apps/system/volsync/app"
-  prune: false
+  prune: true
   sourceRef:
     kind: GitRepository
     name: ironmaiden
