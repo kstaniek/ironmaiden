@@ -8,7 +8,7 @@ metadata:
 spec:
   interval: 10m
   path: "./kubernetes/ironmaiden/apps/home-automation/home-assistant/app"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: ironmaiden
@@ -29,7 +29,7 @@ spec:
 # spec:
 #   interval: 10m
 #   path: "./kubernetes/ironmaiden/apps/home-automation/home-assistant/code"
-#   prune: true
+#   prune: false
 #   sourceRef:
 #     kind: GitRepository
 #     name: ironmaiden

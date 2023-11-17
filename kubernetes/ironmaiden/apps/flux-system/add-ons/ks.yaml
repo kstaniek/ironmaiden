@@ -8,7 +8,7 @@ metadata:
 spec:
   interval: 10m
   path: ./kubernetes/ironmaiden/apps/flux-system/add-ons/monitoring
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: ironmaiden
@@ -23,7 +23,7 @@ metadata:
 spec:
   interval: 10m
   path: ./kubernetes/ironmaiden/apps/flux-system/add-ons/notifications
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: ironmaiden
@@ -38,7 +38,7 @@ metadata:
 spec:
   interval: 10m
   path: ./kubernetes/ironmaiden/apps/flux-system/add-ons/webhooks
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: ironmaiden

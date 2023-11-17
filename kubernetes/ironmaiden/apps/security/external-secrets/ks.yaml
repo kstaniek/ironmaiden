@@ -8,7 +8,7 @@ metadata:
 spec:
   interval: 10m
   path: "./kubernetes/ironmaiden/apps/security/external-secrets/app"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: ironmaiden
@@ -23,7 +23,7 @@ metadata:
 spec:
   interval: 10m
   path: "./kubernetes/ironmaiden/apps/security/external-secrets/stores"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: ironmaiden
@@ -40,7 +40,7 @@ metadata:
 spec:
   interval: 10m
   path: "./kubernetes/ironmaiden/apps/security/external-secrets/cluster-secrets"
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: ironmaiden
