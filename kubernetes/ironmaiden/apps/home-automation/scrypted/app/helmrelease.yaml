@@ -20,27 +20,17 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 2Gi
-              storageClass: ceph-block
-              globalMounts:
-                - path: /server/volume
-
         pod:
-          # annotations:
-          #   k8s.v1.cni.cncf.io/networks: |
-          #     [{
-          #       "name":"multus-iot",
-          #       "namespace": "network",
-          #       "ips": ["10.1.3.153/24"]
-          #     }]
+          annotations:
+            # k8s.v1.cni.cncf.io/networks: |
+            #   [{
+            #     "name":"multus-iot",
+            #     "namespace": "network",
+            #     "ips": ["10.1.3.153/24"]
+            #   }]
           nodeSelector:
             # google.feature.node.kubernetes.io/coral: "true"
             intel.feature.node.kubernetes.io/gpu: "true"
@@ -52,7 +42,7 @@ spec:
           main:
             image:
               repository: ghcr.io/koush/scrypted
-              tag: 18-jammy-full-v0.57.0
+              tag: 18-jammy-full-v0.59.0
             resources:
               requests:
                 gpu.intel.com/i915: 1
@@ -88,6 +78,13 @@ spec:
               - *host
 
     persistence:
+      config:
+        enabled: true
+        existingClaim: scrypted-config
+        advancedMounts:
+          main:
+            main:
+              - path: /server/volume
       cache:
         type: emptyDir
         globalMounts:
