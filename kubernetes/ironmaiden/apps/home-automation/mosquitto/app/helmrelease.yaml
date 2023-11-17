@@ -20,27 +20,15 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
 
-        statefulset:
-          volumeClaimTemplates:
-            - name: data
-              accessMode: ReadWriteOnce
-              size: 512Mi
-              storageClass: ceph-block
-              globalMounts:
-                - path: /data
-
-        # pod:
-        #   annotations:
-        #     k8s.v1.cni.cncf.io/networks: |
-        #       [{
-        #         "name":"multus-iot",
-        #         "namespace": "network",
-        #         "ips": ["10.1.3.151/24"]
-        #       }]
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
 
         initContainers:
           init-config:
@@ -50,7 +38,10 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd"
+            args:
+              - cp /tmp/secret/* /mosquitto/external_config/;
+                mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd;
+                chmod 0600 /mosquitto/external_config/mosquitto_pwd;
 
         containers:
           main:
@@ -63,6 +54,16 @@ spec:
                 memory: 10M
               limits:
                 memory: 10M
+
+
+        # pod:
+        #   annotations:
+        #     k8s.v1.cni.cncf.io/networks: |
+        #       [{
+        #         "name":"multus-iot",
+        #         "namespace": "network",
+        #         "ips": ["10.1.3.151/24"]
+        #       }]
 
     service:
       main:

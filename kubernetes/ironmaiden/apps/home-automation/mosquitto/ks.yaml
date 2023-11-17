@@ -14,5 +14,6 @@ spec:
     name: ironmaiden
   wait: true
   dependsOn:
-    - name: external-secrets-stores
     - name: rook-ceph-cluster
+    - name: volsync
+    - name: external-secrets-stores
