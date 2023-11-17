@@ -14,7 +14,7 @@ spec:
     name: ironmaiden
   wait: false
   dependsOn:
-    - name: multus-config
+    # - name: multus-config
     - name: rook-ceph-cluster
     - name: volsync
     - name: external-secrets-stores
