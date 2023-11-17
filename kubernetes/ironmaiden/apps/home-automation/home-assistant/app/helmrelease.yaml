@@ -52,11 +52,11 @@ spec:
             envFrom:
               - secretRef:
                   name: home-assistant-secret
-            volumeMounts:
-              - mountPath: /dev/ttyUSB0
-                name: ttyusb
-            securityContext:
-              allowPrivilegeEscalation: true
+            # volumeMounts:
+            #   - mountPath: /dev/ttyUSB0
+            #     name: ttyusb
+            # securityContext:
+            #   allowPrivilegeEscalation: true
             probes:
               liveness:
                 enabled: false
@@ -71,24 +71,24 @@ spec:
               limits:
                 memory: 1254M
             
-          code-server:
-            image:
-              repository: ghcr.io/coder/code-server
-              tag: 4.18.0
-            args:
-              - --auth
-              - none
-              - --user-data-dir
-              - "/config/.vscode"
-              - --extensions-dir
-              - "/config/.vscode"
-              - --port
-              - "8080"
-              - "/config"
-          matter-server:
-            image:
-              repository: ghcr.io/home-assistant-libs/python-matter-server
-              tag: 4.0.2
+          # code-server:
+          #   image:
+          #     repository: ghcr.io/coder/code-server
+          #     tag: 4.18.0
+          #   args:
+          #     - --auth
+          #     - none
+          #     - --user-data-dir
+          #     - "/config/.vscode"
+          #     - --extensions-dir
+          #     - "/config/.vscode"
+          #     - --port
+          #     - "8080"
+          #     - "/config"
+          # matter-server:
+          #   image:
+          #     repository: ghcr.io/home-assistant-libs/python-matter-server
+          #     tag: 4.0.2
 
     service:
       main:
@@ -115,19 +115,19 @@ spec:
         tls:
           - hosts:
               - *host
-      code-server:
-        enabled: true
-        className: "internal-nginx"
-        hosts:
-          - host: &code-host hass-code.staniek.io
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: code-server
-        tls:
-          - hosts:
-              - *code-host
+      # code-server:
+      #   enabled: true
+      #   className: "internal-nginx"
+      #   hosts:
+      #     - host: &code-host hass-code.staniek.io
+      #       paths:
+      #         - path: /
+      #           service:
+      #             name: main
+      #             port: code-server
+      #   tls:
+      #     - hosts:
+      #         - *code-host
 
     persistence:
       config:
@@ -137,14 +137,14 @@ spec:
           main:
             main:
               - path: /config
-      dev-bus-usb:
-        type: hostPath
-        hostPath: /dev/bus/usb
-        hostPathType: Directory
-      sys-bus-usb:
-        type: hostPath
-        hostPath: /sys/bus/usb
-        hostPathType: Directory
+      # dev-bus-usb:
+      #   type: hostPath
+      #   hostPath: /dev/bus/usb
+      #   hostPathType: Directory
+      # sys-bus-usb:
+      #   type: hostPath
+      #   hostPath: /sys/bus/usb
+      #   hostPathType: Directory
       deploy-key:
         type: secret
         name: home-assistant-secret
@@ -152,8 +152,8 @@ spec:
         globalMounts:
           - path: /root/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
-      ttyusb:
-        type: hostPath
-        # hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
-        hostPath: /dev/ttyUSB0
+      # ttyusb:
+      #   type: hostPath
+      #   # hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
+      #   hostPath: /dev/ttyUSB0
 
