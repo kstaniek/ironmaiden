@@ -54,9 +54,9 @@ spec:
             envFrom:
               - secretRef:
                   name: home-assistant-secret
-            volumeMounts:
-              - mountPath: /dev/ttyUSB0
-                name: ttyusb
+            # volumeMounts:
+            #   - mountPath: /dev/ttyUSB0
+            #     name: ttyusb
             securityContext:
               privileged: true
             probes:
