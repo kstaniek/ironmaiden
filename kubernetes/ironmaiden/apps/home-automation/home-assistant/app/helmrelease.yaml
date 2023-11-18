@@ -154,6 +154,6 @@ spec:
             subPath: GH_DEPLOY_KEY
       ttyusb:
         type: hostPath
-        # hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
-        hostPath: /dev/ttyUSB0
+        hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
+        # hostPath: /dev/ttyUSB0
 
