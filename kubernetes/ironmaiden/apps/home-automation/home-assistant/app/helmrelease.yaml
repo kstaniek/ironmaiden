@@ -86,7 +86,7 @@ spec:
               - "/config"
             securityContext:
               allowPrivilegeEscalation: false
-              runAsUser: 0
+              runAsUser: 0  # the code-server by defalt runs as code:code which causes no write rights to /config 
           matter-server:
             image:
               repository: ghcr.io/home-assistant-libs/python-matter-server
@@ -142,7 +142,6 @@ spec:
             code-server:
               - path: /config
                 readOnly: false
-
       usb:
         enabled: true
         type: hostPath
@@ -154,9 +153,3 @@ spec:
         globalMounts:
           - path: /root/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
-      # ttyusb:
-      #   enabled: true
-      #   type: hostPath
-      #   # hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
-      #   hostPath: /dev/ttyUSB0
-
