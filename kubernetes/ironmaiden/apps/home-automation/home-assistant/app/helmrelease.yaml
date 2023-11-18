@@ -54,10 +54,7 @@ spec:
             envFrom:
               - secretRef:
                   name: home-assistant-secret
-            # volumeMounts:
-            #   - mountPath: /dev/ttyUSB0
-            #     name: ttyusb
-            securityContext:
+            securityContext:  # this is required to discover usb devices
               privileged: true
             probes:
               liveness:
@@ -157,9 +154,9 @@ spec:
         globalMounts:
           - path: /root/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
-      ttyusb:
-        enabled: true
-        type: hostPath
-        # hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
-        hostPath: /dev/ttyUSB0
+      # ttyusb:
+      #   enabled: true
+      #   type: hostPath
+      #   # hostPath: /dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_7642fecc5541ed11bcf986a7ccf2b06c-if00-port0
+      #   hostPath: /dev/ttyUSB0
 
