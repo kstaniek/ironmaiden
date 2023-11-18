@@ -85,6 +85,9 @@ spec:
               - --port
               - "8080"
               - "/config"
+            securityContext:
+              allowPrivilegeEscalation: false
+              runAsUser: 0
           matter-server:
             image:
               repository: ghcr.io/home-assistant-libs/python-matter-server
