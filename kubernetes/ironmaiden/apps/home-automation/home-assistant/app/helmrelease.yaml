@@ -137,6 +137,10 @@ spec:
           main:
             main:
               - path: /config
+            code-server:
+              - path: /config
+                readOnly: false
+
       dev-bus-usb:
         type: hostPath
         hostPath: /dev/bus/usb
