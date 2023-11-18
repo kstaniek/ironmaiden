@@ -38,6 +38,8 @@ spec:
               }]
           nodeSelector:
             homeassistant.feature.node.kubernetes.io/skyconnect: "true"
+          securityContext:
+            privileged: true
         containers:
           main:
             image:
@@ -55,8 +57,8 @@ spec:
             # volumeMounts:
             #   - mountPath: /dev/ttyUSB0
             #     name: ttyusb
-            securityContext:
-              allowPrivilegeEscalation: true
+            # securityContext:
+            #   allowPrivilegeEscalation: true
             probes:
               liveness:
                 enabled: false
