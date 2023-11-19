@@ -69,7 +69,6 @@ spec:
                 memory: 1254M
               limits:
                 memory: 1254M
-            
           code-server:
             image:
               repository: ghcr.io/coder/code-server
@@ -86,7 +85,7 @@ spec:
               - "/config"
             securityContext:
               allowPrivilegeEscalation: false
-              runAsUser: 0  # the code-server by defalt runs as code:code which causes no write rights to /config 
+              runAsUser: 0  # the code-server by defalt runs as code:code which causes no write rights to /config
           matter-server:
             image:
               repository: ghcr.io/home-assistant-libs/python-matter-server
