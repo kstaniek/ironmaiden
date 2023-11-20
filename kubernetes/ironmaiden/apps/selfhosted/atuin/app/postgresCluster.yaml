@@ -21,14 +21,14 @@ spec:
   #         bucket: "crunchy-postgres"
   #         endpoint: "s3.home.staniek.name:9000"
   #         region: "pl-south-1" # must be set
-  patroni:
-    dynamicConfiguration:
-      synchronous_mode: true
-      postgresql:
-        synchronous_commit: "on"
+  # patroni:
+  #   dynamicConfiguration:
+  #     synchronous_mode: true
+  #     postgresql:
+  #       synchronous_commit: "on"
   instances:
     - name: postgres
-      replicas: 2
+      replicas: 1
       dataVolumeClaimSpec:
         storageClassName: local-hostpath
         accessModes:
