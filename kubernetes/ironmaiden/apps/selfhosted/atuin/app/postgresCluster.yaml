@@ -28,14 +28,14 @@ spec:
         synchronous_commit: "on"
   instances:
     - name: postgres
-      replicas: 1
+      replicas: 2
       dataVolumeClaimSpec:
         storageClassName: local-hostpath
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 5Gi
+            storage: 10Gi
   users:
     - name: atuin
       databases:
