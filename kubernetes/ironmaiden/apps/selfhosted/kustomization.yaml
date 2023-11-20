@@ -5,5 +5,5 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  - ./atuin/ks.yaml
+  # - ./atuin/ks.yaml
   - ./paperless/ks.yaml
