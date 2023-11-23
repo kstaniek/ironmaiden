@@ -4,13 +4,12 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: home-assistant
-  namespace: home-automation
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 2.2.0
+      version: 2.3.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -40,6 +39,7 @@ spec:
             homeassistant.feature.node.kubernetes.io/skyconnect: "true"
           securityContext:
             privileged: true
+
         containers:
           main:
             image:
@@ -49,7 +49,7 @@ spec:
               SECRET_RECORDER_DB_URL:
                 valueFrom:
                   secretKeyRef:
-                    name: home-assistant-pguser-home-assistant
+                    name: "${APP}-pguser-${DB_USER}"
                     key: uri
             envFrom:
               - secretRef:
@@ -69,37 +69,11 @@ spec:
                 memory: 1254M
               limits:
                 memory: 1254M
-          code-server:
-            image:
-              repository: ghcr.io/coder/code-server
-              tag: 4.18.0
-            args:
-              - --auth
-              - none
-              - --user-data-dir
-              - "/config/.vscode"
-              - --extensions-dir
-              - "/config/.vscode"
-              - --port
-              - "8080"
-              - "/config"
-            securityContext:
-              allowPrivilegeEscalation: false
-              runAsUser: 0  # the code-server by defalt runs as code:code which causes no write rights to /config
-          matter-server:
-            image:
-              repository: ghcr.io/home-assistant-libs/python-matter-server
-              tag: 4.0.2
-
     service:
       main:
         ports:
           http:
             port: 8123
-          code-server:
-            port: 8080
-          matter-server:
-            port: 5580
     ingress:
       main:
         enabled: true
@@ -107,7 +81,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: ingress-ext.staniek.io
         hosts:
-          - host: &host "hass.staniek.io"
+          - host: "${HOSTNAME}"
             paths:
               - path: /
                 service:
@@ -115,32 +89,15 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *host
-      code-server:
-        enabled: true
-        className: "internal-nginx"
-        hosts:
-          - host: &code-host hass-code.staniek.io
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: code-server
-        tls:
-          - hosts:
-              - *code-host
-
+              - "${HOSTNAME}"
     persistence:
       config:
         enabled: true
-        existingClaim: home-assistant-config
+        existingClaim: "${VOLSYNC_CLAIM}"
         advancedMounts:
           main:
             main:
               - path: /config
-            code-server:
-              - path: /config
-                readOnly: false
       usb:
         enabled: true
         type: hostPath
