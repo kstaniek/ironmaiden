@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: scrypted
-  namespace: home-automation
 spec:
   interval: 30m
   chart:
@@ -36,7 +35,7 @@ spec:
             intel.feature.node.kubernetes.io/gpu: "true"
           securityContext:
             supplementalGroups:
-              - 65542 # gladius:external-services
+              - 65542 # nfs:external-services
 
         containers:
           main:
@@ -80,7 +79,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: scrypted-config
+        existingClaim: "${VOLSYNC_CLAIM}"
         advancedMounts:
           main:
             main:

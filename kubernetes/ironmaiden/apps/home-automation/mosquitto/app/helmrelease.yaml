@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: mosquitto
-  namespace: home-automation
 spec:
   interval: 30m
   chart:
@@ -25,9 +24,9 @@ spec:
 
         pod:
           securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
+            runAsUser: ${APP_UID}
+            runAsGroup: ${APP_GID}
+            fsGroup: ${APP_GID}
             fsGroupChangePolicy: OnRootMismatch
 
         initContainers:
@@ -69,9 +68,9 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: "mqtt.staniek.io"
+          external-dns.alpha.kubernetes.io/hostname: "${HOSTNAME}."
           io.cilium/lb-ipam-ips: "172.31.30.131"
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Local
         ports:
           http:
             enabled: false
@@ -80,6 +79,12 @@ spec:
             port: 1883
 
     persistence:
+      data:
+        existingClaim: "${VOLSYNC_CLAIM}"
+        advancedMounts:
+          main:
+            main:
+              - path: /data
       mosquitto-configfile:
         type: configMap
         name: mosquitto-configmap
