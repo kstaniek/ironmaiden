@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: grafana
-  namespace: monitoring
 spec:
   chart:
     spec:
@@ -54,6 +53,14 @@ spec:
             - name: "DS_PROMETHEUS"
               value: Prometheus
 
+        blocky:
+          # Ref: https://grafana.com/grafana/dashboards/13768-blocky/
+          gnetId: 13768
+          revision: 3
+          datasource:
+            - name: "DS_PROMETHEUS"
+              value: Prometheus
+
       node-exporter:
         # Ref: https://grafana.com/grafana/dashboards/1860-node-exporter-full/
         node-exporter:
@@ -99,7 +106,7 @@ spec:
       auth:
         oauth_auto_login: true
         oauth_allow_insecure_email_lookup: true
-        signout_redirect_url: https://authentik.staniek.io/application/o/grafana/end-session/
+        signout_redirect_url: https://auth.staniek.io/application/o/grafana/end-session/
       auth.basic:
         enabled: false
       auth.generic_oauth:
@@ -114,9 +121,9 @@ spec:
         use_pkce: true
         client_id: 34oQoMCuCWsGoOUTYHpjZGrLopsXvVCypd8LNowB
         client_secret: # Set by env vars
-        auth_url: https://authentik.staniek.io/application/o/authorize/
-        token_url: https://authentik.staniek.io/application/o/token/
-        api_url: https://authentik.staniek.io/application/o/userinfo/
+        auth_url: https://auth.staniek.io/application/o/authorize/
+        token_url: https://auth.staniek.io/application/o/token/
+        api_url: https://auth.staniek.io/application/o/userinfo/
         # map user groups to Grafana roles
         role_attribute_path: |
           contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
