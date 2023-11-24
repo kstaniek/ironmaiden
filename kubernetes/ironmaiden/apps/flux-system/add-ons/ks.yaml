@@ -3,41 +3,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: flux-monitoring
+  name: &appname flux-addons
   namespace: flux-system
 spec:
+  targetNamespace: flux-system
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
   interval: 10m
-  path: ./kubernetes/ironmaiden/apps/flux-system/add-ons/monitoring
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: ironmaiden
-  wait: true
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: flux-notifications
-  namespace: flux-system
-spec:
-  interval: 10m
-  path: ./kubernetes/ironmaiden/apps/flux-system/add-ons/notifications
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: ironmaiden
-  wait: true
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: flux-webhooks
-  namespace: flux-system
-spec:
-  interval: 10m
-  path: ./kubernetes/ironmaiden/apps/flux-system/add-ons/webhooks
+  path: ./kubernetes/ironmaiden/apps/flux-system/add-ons/app
   prune: true
   sourceRef:
     kind: GitRepository
