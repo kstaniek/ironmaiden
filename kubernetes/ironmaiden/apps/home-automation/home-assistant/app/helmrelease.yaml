@@ -39,7 +39,6 @@ spec:
             homeassistant.feature.node.kubernetes.io/skyconnect: "true"
           securityContext:
             privileged: true
-
         containers:
           main:
             image:
