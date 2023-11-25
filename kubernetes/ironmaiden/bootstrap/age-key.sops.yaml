@@ -8,7 +8,7 @@ metadata:
     namespace: ENC[AES256_GCM,data:AEhTC5k3g+/xyVY=,iv:zmoWfmfOPceQuPHEj0R7uY9XGngmvlkcLZfJxeLHLnI=,tag:kLNNPi5z9xcybV3Vd1f62g==,type:str]
     resourceVersion: ENC[AES256_GCM,data:Duttq7779w==,iv:Hb3LnzsdIuSLaNAoxgtkFlYV+21tDWoXINhuA7g99Sc=,tag:zs8caQ+/OXTktFAxLvSIBw==,type:str]
     uid: ENC[AES256_GCM,data:W6s6Rk3+zyNDcdekNYeJlfFivnmVHcWX5sfw/PQ9sHmOM6Cd,iv:A6vEH2oXMposX1fdI15QI9iZ7eTmG1/MZDzb+N6FpLE=,tag:SanJxY6keH3oSnqaHExfrQ==,type:str]
-type: ENC[AES256_GCM,data:8yX8rDVAVsI=,iv:q+5ONWKwR/ijS92VTAS7WjuOYDDiXXoFvimxUhImP4U=,tag:eGNwHkBlI/tflgTTcN0vBA==,type:str]
+type: ENC[AES256_GCM,data:Paz4311s,iv:tk5eO+BsFtjiTg8UdkwjlggO5RFCucnz4s61i9EmSvc=,tag:m0hv6Dq0JwqfiY+zQ/dfrg==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -24,8 +24,8 @@ sops:
             SXozbk9wT1BvY0pQUk1LWi9Mbk9UQ00KaXvbeiblbWt/5eWXuaD7hM1gQwqLp3d5
             dR9Kf7P8NvG+nCPMK0C9MNsvoZoREksYLO1MfIsH96u5knFr51Dkww==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-07T21:45:55Z"
-    mac: ENC[AES256_GCM,data:DV3kW+W8hKh6FC2oDtJaIcKum7QPxMHcUlgSsu7IenNtjXqPvBuPeFvwGWcyyRDj5QTPnvi97SgOsE2eU4mOHjVP9txrr0h3C19t6BgmxLb0w9IchI/zQQ3VQ08FBwTX9fen+M2awhwwogLhW2y/WbYT4lD72Bi0IBX5wAXu0Fk=,iv:SVeF7PURXpCW/T+cFBiqYgLhDeHsyKOQUrgeu6mAo6I=,tag:YYW5yknjkPGWSeezcslbdQ==,type:str]
+    lastmodified: "2023-11-25T16:00:53Z"
+    mac: ENC[AES256_GCM,data:+2s/Zqaf4IMQI3N2DnkcUKFLldO/KaYSRDfV2j+2Tm9xYNdz7QUARB0uc4RVcmunve89bdczuq2/6vT6ywez+7nrFNi+XsyySAodnXE6M+XSez/Deiou1AJ1X/S433Y4RFYnHGKPE7tqER6SOB2Y0moaB18AcKS1TinoLwfJQA0=,iv:Tc5aagt/ekQTDzaqC9EssqNKKE/1wNI5lesgSUjCvz0=,tag:/hSoi8VWhajq53zre+nVAA==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
-    version: 3.7.3
+    version: 3.8.1
