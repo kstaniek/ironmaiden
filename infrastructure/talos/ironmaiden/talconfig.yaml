@@ -1,0 +1,268 @@
+---
+clusterName: ${clusterName}
+# endpoint: "https://${clusterName}.home.staniek.name:6443"
+endpoint: "https://${clusterName}.home.staniek.name:6443"
+
+
+talosVersion: v1.5.5
+kubernetesVersion: v1.28.4
+
+# Image URL rendered on https://factory.talos.dev
+# customization:
+#     extraKernelArgs:
+#         - net.ifnames=0
+#     systemExtensions:
+#         officialExtensions:
+#             - siderolabs/i915-ucode
+#             - siderolabs/intel-ucode
+#             - siderolabs/thunderbolt
+talosImageURL: factory.talos.dev/installer/a0c62a30427d28ea7f0d6b28ace805f4def1013b43bc2fad5b5227df59e44206
+# PXE https://factory.talos.dev/pxe/a0c62a30427d28ea7f0d6b28ace805f4def1013b43bc2fad5b5227df59e44206/v1.5.5/metal-amd64
+#!ipxe
+# dhcp
+# chain https://factory.talos.dev/pxe/a0c62a30427d28ea7f0d6b28ace805f4def1013b43bc2fad5b5227df59e44206/v1.5.5/metal-amd64
+
+cniConfig:
+  name: none
+
+additionalApiServerCertSans:
+  - ${clusterEndpointIP}
+
+additionalMachineCertSans:
+  - ${clusterEndpointIP}
+  - ${clusterName}.home.staniek.name
+
+nodes:
+  - hostname: metal1.home.staniek.name
+    ipAddress: 172.31.30.11
+    controlPlane: true
+    installDiskSelector:
+      busPath: /pci0000:00/0000:00:17.0/ata1/host0/target0:0:0/0:0:0:0/
+    # machineDisks:
+    #   - device: /dev/disk/by-id/ata-Samsung_SSD_870_QVO_1TB_S5SVNF0R421061D
+    #     partitions:
+    #       - mountpoint: /var/mnt/sata
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 172.31.30.11/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.31.30.254
+        vip:
+          ip: 172.31.30.10
+        # vlans:
+        #   - vlanId: 11
+        #     mtu: 1500
+        #     dhcp: true
+        #     dhcpOptions:
+        #       routeMetric: 4096
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraMounts:
+              - destination: /var/mnt/sata
+                type: bind
+                source: /var/mnt/sata
+                options:
+                  - rbind
+                  - rshared
+                  - rw
+
+  - hostname: metal2.home.staniek.name
+    ipAddress: 172.31.30.12
+    controlPlane: true
+    installDiskSelector:
+      busPath: /pci0000:00/0000:00:17.0/ata1/host0/target0:0:0/0:0:0:0/
+    # machineDisks:
+    #   - device: /dev/disk/by-id/nvme-ADATA_LEGEND_710_2N322L1AGAD9
+    #     partitions:
+    #       - mountpoint: /var/mnt/nvme0n1
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 172.31.30.12/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.31.30.254
+        vip:
+          ip: 172.31.30.10
+        # vlans:
+        #   - vlanId: 11
+        #     mtu: 1500
+        #     dhcp: true
+        #     dhcpOptions:
+        #       routeMetric: 4096
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraMounts:
+              - destination: /var/mnt/sata
+                type: bind
+                source: /var/mnt/sata
+                options:
+                  - rbind
+                  - rshared
+                  - rw
+
+  - hostname: metal3.home.staniek.name
+    ipAddress: 172.31.30.13
+    controlPlane: true
+    installDiskSelector:
+      busPath: /pci0000:00/0000:00:17.0/ata1/host0/target0:0:0/0:0:0:0/
+    # machineDisks:
+    #   - device: /dev/disk/by-id/nvme-ADATA_LEGEND_710_2N3229A18NUD
+    #     partitions:
+    #       - mountpoint: /var/mnt/nvme0n1
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 172.31.30.13/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.31.30.254
+        vip:
+          ip: 172.31.30.10
+        # vlans:
+        #   - vlanId: 11
+        #     mtu: 1500
+        #     dhcp: true
+        #     dhcpOptions:
+        #       routeMetric: 4096
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraMounts:
+              - destination: /var/mnt/sata
+                type: bind
+                source: /var/mnt/sata
+                options:
+                  - rbind
+                  - rshared
+                  - rw
+
+
+controlPlane:
+  patches:
+    # Disable search domain everywhere
+    - |-
+      machine:
+        network:
+          disableSearchDomain: true
+
+    # Force nameserver
+    - |-
+      machine:
+        network:
+          nameservers:
+            - 172.31.20.50
+            - 172.31.20.51
+
+    # Configure NTP
+    - |-
+      machine:
+        time:
+          disabled: false
+          servers:
+            - 172.31.30.254
+
+    # Enable KubePrism
+    - |-
+      machine:
+        features:
+          kubePrism:
+            enabled: true
+            port: 7445
+
+    # Configure cluster loopback
+    - |-
+      machine:
+        network:
+          extraHostEntries:
+            - ip: ${clusterEndpointIP}
+              aliases:
+                - ${clusterName}.home.staniek.name
+
+    # Configure pull through cache
+    # - |-
+    #   machine:
+    #     registries:
+    #       mirrors:
+    #         docker.io:
+    #           endpoints:
+    #             - https://zot.bjw-s.dev/v2/docker.io
+    #           overridePath: true
+    #         ghcr.io:
+    #           endpoints:
+    #             - https://zot.bjw-s.dev/v2/ghcr.io
+    #           overridePath: true
+    #         quay.io:
+    #           endpoints:
+    #             - https://zot.bjw-s.dev/v2/quay.io
+    #           overridePath: true
+    #         gcr.io:
+    #           endpoints:
+    #             - https://zot.bjw-s.dev/v2/gcr.io
+    #           overridePath: true
+    #         registry.k8s.io:
+    #           endpoints:
+    #             - https://zot.bjw-s.dev/v2/registry.k8s.io
+    #           overridePath: true
+    #         public.ecr.aws:
+    #           endpoints:
+    #             - https://zot.bjw-s.dev/v2/public.ecr.aws
+    #           overridePath: true
+
+    # Cluster configuration
+    - |-
+      cluster:
+        allowSchedulingOnMasters: true
+        proxy:
+          disabled: true
+
+    # ETCD configuration
+    - |-
+      cluster:
+        etcd:
+          advertisedSubnets:
+            - 172.31.30.0/24
+
+    # Configure containerd
+    - |-
+      machine:
+        files:
+          - op: create
+            path: /etc/cri/conf.d/20-customization.part
+            content: |
+              [plugins]
+                [plugins."io.containerd.grpc.v1.cri"]
+                  enable_unprivileged_ports = true
+                  enable_unprivileged_icmp = true
+
+    # Disable default API server admission plugins.
+    - |-
+      - op: remove
+        path: /cluster/apiServer/admissionControl
+
+    # Kubelet configuration
+    - |-
+      machine:
+        kubelet:
+          extraArgs:
+            feature-gates: CronJobTimeZone=true,GracefulNodeShutdown=true,NewVolumeManagerReconstruction=false
+            rotate-server-certificates: "true"
+          extraConfig:
+            maxPods: 150
+          nodeIP:
+            validSubnets:
+                - 172.31.30.0/24
+
+    # Custom sysctls
+    - |-
+      machine:
+        sysctls:
+          fs.inotify.max_user_watches: "1048576"
+          fs.inotify.max_user_instances: "8192"

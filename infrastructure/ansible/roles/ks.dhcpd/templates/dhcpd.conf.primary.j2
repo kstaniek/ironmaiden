@@ -15,10 +15,10 @@ failover peer "failover-dhcp" {
 }
 
 authoritative;
-allow booting;
-allow bootp;
+# allow booting;
+# allow bootp;
 next-server {{ tftp_next_server }}; # TFTP
-filename "pxelinux/pxelinux.0";
+# filename "pxelinux/pxelinux.0";
 default-lease-time 86400; # 1 day
 max-lease-time 86400; # 1 day
 

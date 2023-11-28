@@ -6,10 +6,17 @@ services:
     build: ./dnsmasq
     volumes:
       - ./data/pxe-config/dnsmasq.conf:/etc/dnsmasq.conf
-      - ./data/pxe-config/grub.cfg:/tftp/grub.cfg
-      - ./data/os/EFI/BOOT/grubx64.efi:/tftp/grubx64.efi
-      - ./data/os/images/pxeboot/initrd.img:/tftp/initrd.img
-      - ./data/os/images/pxeboot/vmlinuz:/tftp/vmlinuz
+      # - ./data/pxe-config/grub.cfg:/tftp/grub.cfg
+      # - ./data/os/EFI/BOOT/grubx64.efi:/tftp/grubx64.efi
+      # - ./data/os/images/pxeboot/initrd.img:/tftp/initrd.img
+      # - ./data/os/images/pxeboot/vmlinuz:/tftp/vmlinuz
+      - ./data/pxe-config/talos.ipxe:/tftp/talos.ipxe
+      - ./data/talos/kernel-amd64:/tftp/kernel-amd64
+      - ./data/talos/initramfs-amd64.xz:/tftp/initramfs-amd64.xz
+      # - ./data/efi/ipxe.efi:/tftp/ipxe.efi
+      # - ./data/efi/undionly.kpxe:/tftp/undionly.kpxe
+      - ./data/efi/ipxe.efi:/tftp/ipxe.efi
+      - ./data/pxe-config/autoexec.ipxe:/tftp/autoexec.ipxe
     network_mode: host
     cap_add:
       - NET_ADMIN
@@ -18,6 +25,7 @@ services:
     network_mode: host
     volumes:
       - ./data/os:/usr/share/nginx/html/os
+      - ./data/talos:/usr/share/nginx/html/talos
       - ./data/init-config/:/usr/share/nginx/html/init-config
     environment:
       NGINX_PORT: 80

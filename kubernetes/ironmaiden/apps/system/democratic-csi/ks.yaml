@@ -14,6 +14,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: ironmaiden
-  interval: 9m
+  interval: 10m
   prune: true
   wait: true

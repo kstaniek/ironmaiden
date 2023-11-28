@@ -18,4 +18,4 @@ dhcpd_config_file: "dhcpd.conf"
 
 bind_primary_server_address: "172.31.20.50"
 bind_secondary_server_address: "172.31.20.51"
-tftp_next_server: "172.31.20.200"
+tftp_next_server: "172.31.30.1"

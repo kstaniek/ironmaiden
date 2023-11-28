@@ -6,4 +6,4 @@ iso_checksum: "sha256:cd43bb2671472471b1fc0a7a30113dfc9a56831516c46f4dbd12fb43bb
 # iso_url: "https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-minimal.iso"
 # iso_checksum: "sha256:06505828e8d5d052b477af5ce62e50b938021f5c28142a327d4d5c075f0670dc"
 timezone: Europe/Warsaw
-dhcp_proxy: false
+dhcp_proxy: true
