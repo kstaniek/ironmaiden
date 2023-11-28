@@ -90,13 +90,13 @@ spec:
         nodes:
           - name: "metal1"
             devices:
-              - name: "sda"
+              - name: "/dev/disk/by-id/ata-Samsung_SSD_870_QVO_1TB_S5SVNF0R421061D"
           - name: "metal2"
             devices:
-              - name: "sda"
+              - name: "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S75CNX0W703768B"
           - name: "metal3"
             devices:
-              - name: "sda"
+              - name: "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S75CNX0W703776E"
 
     ingress:
       dashboard:
