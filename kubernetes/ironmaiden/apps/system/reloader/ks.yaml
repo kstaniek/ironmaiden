@@ -16,6 +16,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: ironmaiden
-  dependsOn:
-    - name: snapshot-controller
-  wait: false # no flux ks dependents
+  wait: false

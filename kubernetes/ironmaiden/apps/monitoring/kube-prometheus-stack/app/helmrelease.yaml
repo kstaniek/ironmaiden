@@ -20,6 +20,7 @@ spec:
   values:
     crds:
       enabled: true
+    cleanPrometheusOperatorObjectNames: true
 
     ###
     ### Component values
@@ -140,6 +141,10 @@ spec:
             port: 9093
             apiVersion: v2
         enableAdminAPI: true
+        enableFeatures:
+          - auto-gomaxprocs
+          - memory-snapshot-on-shutdown
+          - new-service-discovery-manager
         externalLabels:
           cluster: ironmaiden
         podMonitorSelectorNilUsesHelmValues: false
@@ -168,8 +173,9 @@ spec:
         thanos:
           image: quay.io/thanos/thanos:v0.32.5
           objectStorageConfig:
-            name: thanos-objstore-secret
-            key: objstore.yml
+            existingSecret:
+              name: thanos-objstore-secret
+              key: objstore.yml
           # renovate: datasource=docker depName=quay.io/thanos/thanos
           version: "0.32.5"
         walCompression: true
