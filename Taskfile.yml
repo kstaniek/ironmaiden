@@ -16,6 +16,10 @@ includes:
     taskfile: .taskfiles/externalsecrets
     dir: .taskfiles/externalsecrets
 
+  rook:
+    taskfile: ".taskfiles/rook"
+    dir: .taskfiles/rook
+
   volsync:
     taskfile: ".taskfiles/volsync"
     dir: .taskfiles/volsync

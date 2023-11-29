@@ -177,7 +177,7 @@ spec:
                     {{- include "loki.backendSelectorLabels" . | nindent 12 }}
                 topologyKey: kubernetes.io/hostname
       persistence:
-        size: 20Gi
+        size: 10Gi
         storageClass: local-hostpath
 
     monitoring:
