@@ -51,12 +51,17 @@ nodes:
             gateway: 172.31.30.254
         vip:
           ip: 172.31.30.10
-        # vlans:
-        #   - vlanId: 11
-        #     mtu: 1500
-        #     dhcp: true
-        #     dhcpOptions:
-        #       routeMetric: 4096
+        vlans:
+          - vlanId: 11
+            mtu: 1500
+            dhcp: false
+            dhcpOptions:
+              routeMetric: 4096
+          - vlanId: 12
+            mtu: 1500
+            dhcp: false
+            dhcpOptions:
+              routeMetric: 4096
     patches:
       - |-
         machine:
@@ -88,12 +93,17 @@ nodes:
             gateway: 172.31.30.254
         vip:
           ip: 172.31.30.10
-        # vlans:
-        #   - vlanId: 11
-        #     mtu: 1500
-        #     dhcp: true
-        #     dhcpOptions:
-        #       routeMetric: 4096
+        vlans:
+          - vlanId: 11
+            mtu: 1500
+            dhcp: false
+            dhcpOptions:
+              routeMetric: 4096
+          - vlanId: 12
+            mtu: 1500
+            dhcp: false
+            dhcpOptions:
+              routeMetric: 4096
     patches:
       - |-
         machine:
@@ -125,12 +135,17 @@ nodes:
             gateway: 172.31.30.254
         vip:
           ip: 172.31.30.10
-        # vlans:
-        #   - vlanId: 11
-        #     mtu: 1500
-        #     dhcp: true
-        #     dhcpOptions:
-        #       routeMetric: 4096
+        vlans:
+          - vlanId: 11
+            mtu: 1500
+            dhcp: false
+            dhcpOptions:
+              routeMetric: 4096
+          - vlanId: 12
+            mtu: 1500
+            dhcp: false
+            dhcpOptions:
+              routeMetric: 4096
     patches:
       - |-
         machine:
@@ -241,6 +256,23 @@ controlPlane:
                 [plugins."io.containerd.grpc.v1.cri"]
                   enable_unprivileged_ports = true
                   enable_unprivileged_icmp = true
+
+    # Configure nfs mount options
+    - |-
+      machine:
+        files:
+          - op: overwrite
+            path: /etc/nfsmount.conf
+            permissions: 0o644
+            content: |
+              [ NFSMount_Global_Options ]
+              nfsvers=3
+              hard=True
+              noatime=True
+              nodiratime=True
+              rsize=131072
+              wsize=131072
+              nconnect=8
 
     # Disable default API server admission plugins.
     - |-
