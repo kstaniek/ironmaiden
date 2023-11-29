@@ -17,9 +17,9 @@ spec:
     kind: GitRepository
     name: ironmaiden
   wait: true
-  dependsOn:
-    # - name: alertmanager
-    - name: rook-ceph-cluster
+  # dependsOn:
+  #   - name: alertmanager
+  #   - name: rook-ceph-cluster
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
