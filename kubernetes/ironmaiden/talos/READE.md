@@ -11,9 +11,9 @@ talosctl apply-config -n 172.31.30.13 -f ./clusterconfig/ironmaiden-metal3.home.
 
 talosctl bootstrap -n 172.31.30.11
 
-./deploy-integrations.sh
-
 talosctl kubeconfig -n 172.31.30.11
+
+./deploy-integrations.sh
 ```
 
 Wait for:
