@@ -60,14 +60,16 @@ tasks:
     internal: true
     cmds:
       - envsubst < <(cat {{.wipeRookDiskJobTemplate}}) | kubectl apply -f -
+      - echo {{.wipeCephDiskJobName}}
       - bash {{.waitForJobScript}} {{.wipeCephDiskJobName}} default
       - kubectl -n default wait job/{{.wipeCephDiskJobName}} --for condition=complete --timeout=1m
-      - kubectl -n default logs job/{{.wipeCephDiskJobName}} --container list
+      - kubectl -n default logs job/{{.wipeCephDiskJobName}}
       - kubectl -n default delete job {{.wipeCephDiskJobName}}
     vars:
       node: '{{ or .node (fail "`node` is required") }}'
       ceph_disk: '{{ or .ceph_disk (fail "`ceph_disk` is required") }}'
       jobName: 'wipe-disk-{{- .node -}}-{{- .ceph_disk | replace "/" "-" -}}-{{- .ts -}}'
+      wipeCephDiskJobName: 'wipe-disk-{{- .node -}}-{{- .ceph_disk | replace "/" "-" -}}-{{- .ts -}}'
       wipeRookDiskJobTemplate: "WipeDiskJob.tmpl.yaml"
     env: *task-vars
     preconditions:
@@ -82,11 +84,12 @@ tasks:
       - envsubst < <(cat {{.wipeRookDataJobTemplate}}) | kubectl apply -f -
       - bash {{.waitForJobScript}} {{.wipeRookDataJobName}} default
       - kubectl -n default wait job/{{.wipeRookDataJobName}} --for condition=complete --timeout=1m
-      - kubectl -n default logs job/{{.wipeRookDataJobName}} --container list
+      - kubectl -n default logs job/{{.wipeRookDataJobName}}
       - kubectl -n default delete job {{.wipeRookDataJobName}}
     vars:
       node: '{{ or .node (fail "`node` is required") }}'
       jobName: "wipe-rook-data-{{- .node -}}-{{- .ts -}}"
+      wipeRookDataJobName: "wipe-rook-data-{{- .node -}}-{{- .ts -}}"
       wipeRookDataJobTemplate: "WipeRookDataJob.tmpl.yaml"
     env: *task-vars
     preconditions:
