@@ -19,19 +19,8 @@ spec:
   values:
     controllers:
       main:
-        type: statefulset
-
         annotations:
           reloader.stakater.com/auto: "true"
-
-        statefulset:
-          volumeClaimTemplates:
-            - name: data
-              accessMode: ReadWriteOnce
-              size: 15Gi
-              storageClass: ceph-block
-              globalMounts:
-                - path: /data/local
 
         pod:
           securityContext:
@@ -42,7 +31,7 @@ spec:
           main:
             image:
               repository: ghcr.io/paperless-ngx/paperless-ngx
-              tag: 1.17.4
+              tag: 2.0.0
             env:
               # Configure application
               PAPERLESS_SECRET_KEY:
@@ -127,7 +116,8 @@ spec:
             main:
               - path: /data/local
       nas:
-        type: persistentVolumeClaim
-        existingClaim: paperless-nfs
+        type: nfs
+        server: shaun.home.staniek.name
+        path: /share/nfs/Apps/paperless
         globalMounts:
           - path: /data/nas
