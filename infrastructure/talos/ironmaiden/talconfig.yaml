@@ -267,6 +267,7 @@ controlPlane:
               rsize=131072
               wsize=131072
               nconnect=8
+              nolock=True
 
     # Disable default API server admission plugins.
     - |-
