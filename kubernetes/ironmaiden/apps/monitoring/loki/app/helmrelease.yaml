@@ -73,8 +73,9 @@ spec:
           storage:
             s3:
               s3: null
-              insecure: true
-              s3forcepathstyle: true
+              insecure: false
+              s3forcepathstyle: false
+
           ring:
             kvstore:
               store: memberlist
