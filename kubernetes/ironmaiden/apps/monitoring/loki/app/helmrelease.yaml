@@ -155,15 +155,15 @@ spec:
 
     read:
       replicas: 3
-      # affinity: |
-      #   podAntiAffinity:
-      #     preferredDuringSchedulingIgnoredDuringExecution:
-      #       - weight: 1
-      #         podAffinityTerm:
-      #           labelSelector:
-      #             matchLabels:
-      #               {{- include "loki.readSelectorLabels" . | nindent 12 }}
-      #           topologyKey: kubernetes.io/hostname
+      affinity: |
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    {{- include "loki.readSelectorLabels" . | nindent 12 }}
+                topologyKey: kubernetes.io/hostname
 
     backend:
       replicas: 3
