@@ -72,7 +72,7 @@ spec:
         enabled: true
         className: "internal-nginx"
         hosts:
-          - host: &host hass-code.staniek.io
+          - host: "${HOSTNAME}"
             paths:
               - path: /
                 service:
@@ -80,8 +80,10 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *host
+              - "${HOSTNAME}"
     persistence:
       config:
         enabled: true
-        existingClaim: config-home-assistant-0
+        existingClaim: "${VOLSYNC_CLAIM}"
+      tmp:
+        type: emptyDir

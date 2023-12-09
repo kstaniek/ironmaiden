@@ -38,6 +38,11 @@ spec:
           nodeSelector:
             homeassistant.feature.node.kubernetes.io/skyconnect: "true"
           securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
             privileged: true
         containers:
           main:
@@ -64,10 +69,10 @@ spec:
                 enabled: false
             resources:
               requests:
-                cpu: 47m
-                memory: 1254M
+                cpu: 10m
+                memory: 128Mi
               limits:
-                memory: 1254M
+                memory: 1Gi
     service:
       main:
         ports:

@@ -33,3 +33,30 @@ spec:
       VOLSYNC_CLAIM: home-assistant-config
       DB_NAME: home-assistant
       DB_USER: home-assistant
+
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &appname home-assistant-code
+  namespace: flux-system
+spec:
+  targetNamespace: home-automation
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *appname
+  path: "./kubernetes/ironmaiden/apps/home-automation/home-assistant/code"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: ironmaiden
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  postBuild:
+    substitute:
+      APP: *appname
+      HOSTNAME: hass-code.staniek.io
+      VOLSYNC_CLAIM: home-assistant-config
