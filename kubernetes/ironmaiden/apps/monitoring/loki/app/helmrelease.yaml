@@ -16,24 +16,13 @@ spec:
         name: grafana
         namespace: flux-system
       interval: 30m
-  # maxHistory: 2
-  # install:
-  #   remediation:
-  #     retries: 3
-  # upgrade:
-  #   cleanupOnFail: true
-  #   remediation:
-  #     retries: 3
-  # uninstall:
-  #   keepHistory: false
-
   values:
     loki:
       structuredConfig:
         auth_enabled: false
 
         server:
-          log_level: debug
+          log_level: info
           http_listen_port: 3100
           grpc_listen_port: 9095
 
@@ -120,7 +109,7 @@ spec:
         secret.reloader.stakater.com/reload: loki-secret
 
     gateway:
-      replicas: 2
+      replicas: 3
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -133,14 +122,14 @@ spec:
       enabled: true
       image:
         registry: ghcr.io
-        # repository: nginxinc/nginx-unprivileged
-        # tag: 1.25-alpine
+        repository: nginxinc/nginx-unprivileged
+        tag: 1.25-alpine
       ingress:
         enabled: true
         ingressClassName: "internal-nginx"
-        # annotations:
-        #   nginx.ingress.kubernetes.io/whitelist-source-range: |
-        #     10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: |
+            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
         hosts:
           - host: &host "loki-ironmaiden.staniek.io"
             paths:
@@ -151,7 +140,7 @@ spec:
               - *host
 
     write:
-      replicas: 2
+      replicas: 3
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -166,7 +155,7 @@ spec:
         storageClass: local-hostpath
 
     read:
-      replicas: 2
+      replicas: 3
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -178,7 +167,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
 
     backend:
-      replicas: 2
+      replicas: 3
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
