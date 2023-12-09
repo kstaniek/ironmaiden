@@ -196,8 +196,8 @@ spec:
         folderAnnotation: grafana_folder
         searchNamespace: ALL
         provider:
+          disableDelete: true
           foldersFromFilesStructure: true
-          updateIntervalSeconds: 30
       datasources:
         enabled: true
         labelValue: ""
