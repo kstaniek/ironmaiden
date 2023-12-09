@@ -31,6 +31,9 @@ spec:
       APP_UID: "0"
       APP_GID: "0"
       VOLSYNC_CLAIM: home-assistant-config
+      VOLSYNC_ACCESSMODES: ReadWriteMany
+      VOLSYNC_STORAGECLASS: ceph-filesystem
+      VOLSYNC_SNAPSHOTCLASS: csi-ceph-filesystem
       DB_NAME: home-assistant
       DB_USER: home-assistant
 
