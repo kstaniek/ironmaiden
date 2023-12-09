@@ -33,6 +33,7 @@ spec:
       VOLSYNC_CLAIM: home-assistant-config
       VOLSYNC_ACCESSMODES: ReadWriteMany
       VOLSYNC_STORAGECLASS: ceph-filesystem
+      VOLSYNC_SNAPSHOTCLASS: csi-ceph-filesystem
       DB_NAME: home-assistant
       DB_USER: home-assistant
 
