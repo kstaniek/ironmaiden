@@ -18,5 +18,6 @@ spec:
     name: ironmaiden
   dependsOn:
     - name: snapshot-controller
+    - name: rook-ceph-cluster
   wait: false
   timeout: 2m
