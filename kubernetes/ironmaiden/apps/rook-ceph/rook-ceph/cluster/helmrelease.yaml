@@ -154,10 +154,10 @@ spec:
             activeStandby: true
             resources:
               requests:
-                cpu: 1000m
-                memory: "4Gi"
+                cpu: 35m
+                memory: "1Gi"
               limits:
-                memory: "4Gi"
+                memory: "3Gi"
         storageClass:
           enabled: true
           isDefault: false
