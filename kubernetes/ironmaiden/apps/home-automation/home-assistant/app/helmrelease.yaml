@@ -111,5 +111,5 @@ spec:
         name: home-assistant-secret
         defaultMode: 256
         globalMounts:
-          - path: /root/.ssh/id_rsa
+          - path: /home/coder/.ssh/id_rsa
             subPath: GH_DEPLOY_KEY
