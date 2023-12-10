@@ -72,6 +72,12 @@ spec:
         enabled: true
         className: "internal-nginx"
         hosts:
+          - host: &host "{{ .Release.Name }}.staniek.io"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
           - host: "${HOSTNAME}"
             paths:
               - path: /
@@ -80,10 +86,9 @@ spec:
                   port: http
         tls:
           - hosts:
+              - *host
               - "${HOSTNAME}"
     persistence:
       config:
         enabled: true
         existingClaim: "${VOLSYNC_CLAIM}"
-      tmp:
-        type: emptyDir
