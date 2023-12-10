@@ -98,12 +98,12 @@ spec:
             devices:
               - name: "/dev/disk/by-id/nvme-ADATA_LEGEND_710_2N3229A18NUD"
     ingress:
-      ingressClassName: "internal-nginx"
       dashboard:
+        ingressClassName: "internal-nginx"
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         host:
-          name: &host rook.staniek.io
+          name: &host rook-ironmaiden.staniek.io
           path: "/"
         tls:
           - hosts:
