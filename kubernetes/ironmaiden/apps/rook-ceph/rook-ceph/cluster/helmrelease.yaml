@@ -81,7 +81,7 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
-        ssl: false
+        ssl: true
 
       storage:
         useAllNodes: false
@@ -102,7 +102,7 @@ spec:
       dashboard:
         ingressClassName: "internal-nginx"
         annotations:
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         host:
           name: &host rook-ironmaiden.staniek.io
           path: "/"
