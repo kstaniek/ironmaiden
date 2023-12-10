@@ -106,10 +106,3 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /dev/bus/usb
-      deploy-key:
-        type: secret
-        name: home-assistant-secret
-        defaultMode: 256
-        globalMounts:
-          - path: /home/coder/.ssh/id_rsa
-            subPath: GH_DEPLOY_KEY
