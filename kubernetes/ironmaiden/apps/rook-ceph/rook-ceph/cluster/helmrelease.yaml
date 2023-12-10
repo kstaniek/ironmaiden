@@ -102,7 +102,7 @@ spec:
       dashboard:
         ingressClassName: "internal-nginx"
         annotations:
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
         host:
           name: &host rook-ironmaiden.staniek.io
           path: "/"
