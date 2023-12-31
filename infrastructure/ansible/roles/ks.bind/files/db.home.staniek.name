@@ -78,6 +78,9 @@ gardenlightcube02          IN  A      172.31.12.71
 gardenlightcube01          IN  A      172.31.12.15
 gardenlightlargesphere     IN  A      172.31.12.109
 gardenlight05              IN  A      172.31.12.98
+shelly-plug01              IN  A      172.31.12.89
+shelly-plug02              IN  A      172.31.12.90
+shelly-plug03              IN  A      172.31.12.91
 gw-vlan12                  IN  A      172.31.12.254
 packer                     IN  A      172.31.21.1
 gw-vlan21                  IN  A      172.31.21.254

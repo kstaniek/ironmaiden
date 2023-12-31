@@ -77,6 +77,9 @@ $ORIGIN 31.172.in-addr.arpa.
 109.12                 IN  PTR  gardenlightlargesphere.home.staniek.name.
 98.12                  IN  PTR  gardenlight05.home.staniek.name.
 55.12                  IN  PTR  shelly-pixar.home.staniek.name.
+89.12                  IN  PTR  shelly-plug01.home-staniek.name.
+90.12                  IN  PTR  shelly-plug02.home-staniek.name.
+91.12                  IN  PTR  shelly-plug03.home-staniek.name.
 254.12                 IN  PTR  gw-vlan12.home.staniek.name.
 1.21                   IN  PTR  packer.home.staniek.name.
 254.21                 IN  PTR  gw-vlan21.home.staniek.name.

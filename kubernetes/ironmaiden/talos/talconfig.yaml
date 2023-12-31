@@ -1,11 +1,10 @@
 ---
 clusterName: ${clusterName}
-# endpoint: "https://${clusterName}.home.staniek.name:6443"
-endpoint: "https://${clusterName}.home.staniek.name:6443"
+endpoint: "https://${clusterName}.${clusterDNSSuffix}:6443"
 
 
-talosVersion: v1.5.5
-kubernetesVersion: v1.28.4
+talosVersion: v1.6.1
+kubernetesVersion: 1.29.0
 
 # Image URL rendered on https://factory.talos.dev
 # customization:
@@ -16,7 +15,7 @@ kubernetesVersion: v1.28.4
 #             - siderolabs/i915-ucode
 #             - siderolabs/intel-ucode
 #             - siderolabs/thunderbolt
-talosImageURL: factory.talos.dev/installer/a0c62a30427d28ea7f0d6b28ace805f4def1013b43bc2fad5b5227df59e44206
+# talosImageURL: factory.talos.dev/installer/a0c62a30427d28ea7f0d6b28ace805f4def1013b43bc2fad5b5227df59e44206
 # PXE https://factory.talos.dev/pxe/a0c62a30427d28ea7f0d6b28ace805f4def1013b43bc2fad5b5227df59e44206/v1.5.5/metal-amd64
 #!ipxe
 # dhcp
@@ -25,12 +24,12 @@ talosImageURL: factory.talos.dev/installer/a0c62a30427d28ea7f0d6b28ace805f4def10
 cniConfig:
   name: none
 
-additionalApiServerCertSans:
+additionalApiServerCertSans: &san
   - ${clusterEndpointIP}
+  - ${clusterName}.${clusterDNSSuffix}
+  - "127.0.0.1" # KubePrism
 
-additionalMachineCertSans:
-  - ${clusterEndpointIP}
-  - ${clusterName}.home.staniek.name
+additionalMachineCertSans: *san
 
 nodes:
   - hostname: metal1.home.staniek.name
@@ -61,7 +60,7 @@ nodes:
             addresses:
               - 172.31.12.101/24
     patches:
-      - |-
+      - &kubelet_extra_mounts |-
         machine:
           kubelet:
             extraMounts:
@@ -101,17 +100,7 @@ nodes:
             addresses:
               - 172.31.12.102/24
     patches:
-      - |-
-        machine:
-          kubelet:
-            extraMounts:
-              - destination: /var/mnt/sata
-                type: bind
-                source: /var/mnt/sata
-                options:
-                  - rbind
-                  - rshared
-                  - rw
+      - *kubelet_extra_mounts
 
   - hostname: metal3.home.staniek.name
     ipAddress: 172.31.30.13
@@ -141,20 +130,19 @@ nodes:
             addresses:
               - 172.31.12.103/24
     patches:
-      - |-
-        machine:
-          kubelet:
-            extraMounts:
-              - destination: /var/mnt/sata
-                type: bind
-                source: /var/mnt/sata
-                options:
-                  - rbind
-                  - rshared
-                  - rw
+      - *kubelet_extra_mounts
 
 
 controlPlane:
+  schematic:
+    customization:
+      extraKernelArgs:
+        - net.ifnames=0
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/intel-ucode
+          - siderolabs/i915-ucode
+          - siderolabs/thunderbolt
   patches:
     # Disable search domain everywhere
     - |-
@@ -193,7 +181,7 @@ controlPlane:
           extraHostEntries:
             - ip: ${clusterEndpointIP}
               aliases:
-                - ${clusterName}.home.staniek.name
+                - ${clusterName}.${clusterDNSSuffix}
 
     # Configure pull through cache
     # - |-
@@ -268,6 +256,7 @@ controlPlane:
               wsize=131072
               nconnect=8
               lock=False
+              nolock=True
 
     # Disable default API server admission plugins.
     - |-

@@ -402,6 +402,21 @@ network_topology:
               fqdn: ENC[AES256_GCM,data:1WIDA1NW1Rbh2jppZU/ZhFtLHLEmCaNtcy2N5jLO,iv:70Nbeyi1fOp7vYDFgOrjeXsAsmHKlEQpk9nANl22AwM=,tag:VX9VJlkU7H0M9UrOQbK1aQ==,type:str]
               dhcp:
                 mac: ENC[AES256_GCM,data:o6lGFeZqqWQ2NsPWYW4YtbQ=,iv:BcTQC1RGI7FMHpoeTLnUvYNO0SIUOxuJ3P6QnH2rQDA=,tag:bAgTy5xpaZ9mcRemfwGxiQ==,type:str]
+            - address: ENC[AES256_GCM,data:KZk4Wd3hCfNUmzBN,iv:fKtTVWFCqMud12Med3I6wBDyv09YxFI0SEQRqPn2pkw=,tag:mzV2aFXTB6iyLxsderrhDw==,type:str]
+              hostname: ENC[AES256_GCM,data:Yb/GhTCDQ284Exrrsg==,iv:c6mjN3/dMmv6IHoZTRafG6UJbegyKkI7eB83/QhXLks=,tag:86rVCoyNY2xgJbTzhxVDRA==,type:str]
+              fqdn: ENC[AES256_GCM,data:9UWgdHv8asV3z0ozzoWePY7DLJ14aSuo3VNlm84Psw==,iv:O2l/HT9StrPBTeFuZMCAOmgQzojOU9+Ygt8OzhkIUSA=,tag:qEs9SneHDq7Qh6e0S5gg1g==,type:str]
+              dhcp:
+                mac: ENC[AES256_GCM,data:2APlQZZ1v7cAWGUP4IdLOU4=,iv:BX8MGuWOFCutzdlSoHgzPFXo6YXdT3n4uROSeBoW6Yc=,tag:SyFdyCnUmFQ4BY1G0gpHdw==,type:str]
+            - address: ENC[AES256_GCM,data:ZZsMRi8AZ/eK7PDa,iv:yTQ35pKqwzcFo1Sz6ebYBDRm+sIjJ2JV0oXesfnH9B4=,tag:kMeqiKnU7yg0XR/G+GcnBg==,type:str]
+              hostname: ENC[AES256_GCM,data:WBaAnpQ9UYl8nuuyYg==,iv:jftSmfugk+sX4p57npn6aOxHCanYAm/zmXZ8fhH6xno=,tag:aI2rLjs2aygkfd9RE7uyGw==,type:str]
+              fqdn: ENC[AES256_GCM,data:3kpLHzelXolIs5HLhCT+212ECtSjzAIJs9YFMhwn5g==,iv:mjVJe6YjAHn20CEMCvbvoeVZzM0zlOPgFBnK4UKWDu0=,tag:J1IQhULdEQJQcFb073bWQA==,type:str]
+              dhcp:
+                mac: ENC[AES256_GCM,data:bHv0QFFnlPsXSvJzqp0TADw=,iv:L58Cog+ltG2CjS/RWfuEabnXhFZusZgcgnDkR/KQ15U=,tag:t7ove5UpEhbScVKebekGSg==,type:str]
+            - address: ENC[AES256_GCM,data:UKOkamApuZWeieiM,iv:ziVN33COF7GFJwvArYN4dBCN3eTyr5HVBokz2PaX6EM=,tag:XT2QdicjA7VpfpCirmj3MQ==,type:str]
+              hostname: ENC[AES256_GCM,data:EEt4j/f7VEySCsqcaA==,iv:qDt5fFf3zQT+nOqS/sVGPN7WUoStgN00FzaQmvlS2Gw=,tag:9flF7IKtbHXlhSzOzTIJ9Q==,type:str]
+              fqdn: ENC[AES256_GCM,data:wTm4nqPWc00cVPiNCQbrCHVFLHCvU6XZITyPjkfogg==,iv:Z6ops4fLaRDai8GTGor42BatZ/nruOhIugBDnyrLm/E=,tag:kA/GV5HnlPOaF1VaT16unQ==,type:str]
+              dhcp:
+                mac: ENC[AES256_GCM,data:kWBk9A4BNU/9RZTM3HBBxq0=,iv:lNNwDmm0WHnteXExa5d8qSCvcJxArZex3TRh+wATGyw=,tag:gKj9PZfuKuKbbAhqWTT0fA==,type:str]
             - address: ENC[AES256_GCM,data:CAOx9r9JKEL2If+rUQ==,iv:7fHVZQNXe+UXDJ0/5bRkcHRdRequKX0LN2ORmVocaoo=,tag:QZ1l4if99ydR6SGAnkkp8w==,type:str]
               hostname: ENC[AES256_GCM,data:v05gWJIDaME0760MSaWT0jcAhKAYkw==,iv:yuaO6j5PsrU08WoEe1Flp+Ng1qMP05SCpYnmaULhd7M=,tag:r9BntWcWRBxkDxeGWi9X3A==,type:str]
               fqdn: ENC[AES256_GCM,data:ng6RNB8fEswiwXNySMp9uHkyQ6TUufRrkyR9nfxRkNasHCo=,iv:35PYxsMStB0zu1hvmS07z2xLl3f0d5IkqB1z6d3YkiA=,tag:KmZWgHkA5vH12xbSyhND8w==,type:str]
@@ -510,8 +525,8 @@ sops:
             dGJHT0I3alpKcVUvc1MvcFpLUVlRZDQKuik/aywnkF3Ahql2x2AMYHFWJWZ7e86N
             sudEsIRr1kRqcQ2J57F905U0XwZothAg9++SAlXaTIGi2rzQ0zMWZA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-11-26T18:16:31Z"
-    mac: ENC[AES256_GCM,data:VfSOS0KxMfoEjHqYpbDOUCQvsEl7icWx+tVpvsFEkw9CNa0IMAxrQx3WekVN1UOG687w4JOBC2F+K/tH61PVrRtT8dP0D1JSjzz4JZbNNll6YG+EQ4RQvmY2osSwPPw5G/pssdrsKTU3Ht1oRZXlY0QZBU5GBK9DRR9FTjdog68=,iv:hRkpEaRNy6UCsN3TBmyjsUeE4LfPGzSl770dPnuN0Ls=,tag:XRXMbAJEBWmJlvC9+MmD3A==,type:str]
+    lastmodified: "2023-12-30T16:51:03Z"
+    mac: ENC[AES256_GCM,data:FgWOYckUdy1iQNBx4SFZrIbsMzM2esiyOpFthOzjRz8v8ps9eCl2lhExr5zOXnVDTmYrM8TnMBhPXQBXs71EBFmTULweMitxt4m/YhPczT3W099zvMXBb2ipR8O7g7Ngz9jeceijG8aP6bbeQN6T3zR/5rO3+BbYenZ5SBg7bSo=,iv:+Ew3P4Q16Zwbyr4UNJajzqZL2FZMXNUJmCqdIJs3Q7s=,tag:wSi4lfSQOR7Khw8ZcKlV4Q==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.8.1
