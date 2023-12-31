@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "${app}-wipe-${ts}"
+  name: "${app}-unlock-snapshots-${ts}"
   namespace: "${ns}"
 spec:
   ttlSecondsAfterFinished: 3600
@@ -11,15 +11,19 @@ spec:
       automountServiceAccountToken: false
       restartPolicy: OnFailure
       containers:
-        - name: wipe
-          image: public.ecr.aws/docker/library/busybox:latest
-          command: ["/bin/sh", "-c", "cd /config; find . -delete"]
-          volumeMounts:
-            - name: config
-              mountPath: /config
-          securityContext:
-            privileged: true
-      volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: "${claim}"
+        - name: unlock-minio
+          image: docker.io/restic/restic:0.16.2
+          args:
+            - unlock
+            - --remove-all
+          envFrom:
+            - secretRef:
+                name: "${app}-volsync-minio"
+        - name: unlock-r2
+          image: docker.io/restic/restic:0.16.2
+          args:
+            - unlock
+            - --remove-all
+          envFrom:
+            - secretRef:
+                name: "${app}-volsync-r2"
