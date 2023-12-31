@@ -64,9 +64,9 @@ nodes:
         machine:
           kubelet:
             extraMounts:
-              - destination: /var/mnt/sata
+              - destination: /var/mnt
                 type: bind
-                source: /var/mnt/sata
+                source: /var/mnt
                 options:
                   - rbind
                   - rshared
@@ -268,8 +268,7 @@ controlPlane:
       machine:
         kubelet:
           extraArgs:
-            feature-gates: CronJobTimeZone=true,GracefulNodeShutdown=true,NewVolumeManagerReconstruction=false
-            rotate-server-certificates: "true"
+            feature-gates: GracefulNodeShutdown=true,NewVolumeManagerReconstruction=false
           extraConfig:
             maxPods: 150
           nodeIP:
